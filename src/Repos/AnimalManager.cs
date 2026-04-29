@@ -1,17 +1,20 @@
 ﻿using AnimalShelter.src.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace animal_Shelter.Repos
 {
     public class AnimalManager : IAnimalRepository
     {
-        private readonly List<Animal> _animals = new();
-        private int _nextId = 1;
+        private readonly List<Animal> _animals;
+        private int _nextId;
 
+        public AnimalManager()
+        {
+            _animals = new List<Animal>();
+            _nextId = 1;
+        }
+
+        //IAnimalRepository implementation
         public int Count => _animals.Count;
 
         public int NextId() => _nextId++;
@@ -20,15 +23,17 @@ namespace animal_Shelter.Repos
         {
             if (animal == null)
                 throw new ArgumentNullException(nameof(animal));
-
+            if (_animals.Any(a => a.Id == animal.Id))
+                throw new InvalidOperationException(
+                    $"An animal with ID {animal.Id} already exists.");
             _animals.Add(animal);
         }
 
         public bool Remove(int id)
         {
             var animal = FindById(id);
-            if (animal == null) return false;
-
+            if (animal == null) 
+                return false;
             _animals.Remove(animal);
             return true;
         }
@@ -37,10 +42,13 @@ namespace animal_Shelter.Repos
             => _animals.FirstOrDefault(a => a.Id == id);
 
         public List<Animal> FindByName(string name)
-            => _animals
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Cannot be empty.", nameof(name));
+            return _animals
                 .Where(a => a.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
                 .ToList();
-
+        }
         public List<Animal> FindByStatus(AnimalStatus status)
             => _animals.Where(a => a.Status == status).ToList();
 
@@ -49,11 +57,10 @@ namespace animal_Shelter.Repos
             var animal = FindById(id);
             if (animal == null)
                 throw new Exception("Animal not found");
-
             animal.Status = newStatus;
         }
 
         public IReadOnlyList<Animal> GetAll()
-            => _animals.AsReadOnly();
+            => _animals.OrderBy(a => a.Id).ToList().AsReadOnly();
     }
 }

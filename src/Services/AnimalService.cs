@@ -1,11 +1,6 @@
 ﻿using animal_Shelter.Factory;
 using animal_Shelter.Repos;
 using AnimalShelter.src.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace animal_Shelter.Services
 {
@@ -47,7 +42,6 @@ namespace animal_Shelter.Services
             var animal = _repo.FindById(id);
             if (animal == null)
                 throw new Exception("Animal not found");
-
             return animal;
         }
 
@@ -78,7 +72,6 @@ namespace animal_Shelter.Services
         {
             if (string.IsNullOrWhiteSpace(note))
                 throw new Exception("Note cannot be empty");
-
             var animal = GetAnimal(id);
             animal.AddCareNote(note);
         }

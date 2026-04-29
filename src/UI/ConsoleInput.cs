@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace animal_Shelter.UI
 {
     public class ConsoleInput
     {
+        //Reads an integer within [min, max] and loops until valid.
         public static int ReadInt(string prompt, int min, int max)
         {
-            int value;
-
+ 
             while (true)
             {
                 Console.Write("  " + prompt);
                 string raw = Console.ReadLine() ?? string.Empty;
-                if (int.TryParse(raw, out value) && value >= min && value <= max)
+                if (int.TryParse(raw, out int value) && value >= min && value <= max)
                     return value;
 
-                Console.WriteLine("Invalid number, try again.");
+                Console.WriteLine($"Please enter a number between {min} and {max}.");
             }
         }
 
+        //Reads a non-empty string and loops until valid.
         public static string ReadString(string prompt)
         {
             while (true)
@@ -35,7 +31,7 @@ namespace animal_Shelter.UI
             }
         }
 
-
+        //Reads y/n and loops until valid.
         public static bool ReadBool(string prompt)
         {
             while (true)

@@ -1,10 +1,5 @@
 ﻿using animal_Shelter.UI;
 using AnimalShelter.src.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace animal_Shelter.Factory
 {
@@ -27,8 +22,8 @@ namespace animal_Shelter.Factory
             int age = ConsoleInput.ReadInt("Age (0-50): ", 0, 50);
             bool isIndoor = ConsoleInput.ReadBool("Indoor cat? (y/n): ");
             string color = ConsoleInput.ReadString("Color/pattern: ");
-            bool isNeutered = ConsoleInput.ReadBool("Neutered? (y/n): ");
-            return new Cat(id, name, age, isIndoor, color, isNeutered);
+            bool isVaccinated = ConsoleInput.ReadBool("Vaccinated? (y/n): ");
+            return new Cat(id, name, age, isIndoor, color, isVaccinated);
         }
 
         public static Bird BuildBird(int id)
