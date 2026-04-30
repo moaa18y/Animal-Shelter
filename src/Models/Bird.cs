@@ -34,6 +34,6 @@ namespace AnimalShelter.src.Models
         }
 
         public override string GetSpeciesInfo()
-            => $"Bird | Name: {Name} | Age: {Age} | Species: {Species} | Can Fly: {(CanFly ? "Yes" : "No")} | Wingspan: {WingSpan} | Status: {Status}";
+            => $"Bird | Species: {Species} | Can Fly: {(CanFly ? "Yes" : "No")} | Wingspan: {WingSpan}";
     }
 }

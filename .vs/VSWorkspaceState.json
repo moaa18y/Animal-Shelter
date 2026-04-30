@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\Controllers",
+    "\\src\\Repos",
+    "\\src\\Services",
+    "\\src\\UI"
   ],
+  "SelectedNode": "\\src\\Services\\AnimalService.cs",
   "PreviewInSolutionExplorer": false
 }

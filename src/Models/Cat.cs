@@ -29,7 +29,7 @@ namespace AnimalShelter.src.Models
         }
 
         public override string GetSpeciesInfo()
-              => $"Cat | Name: {Name} | Age: {Age} | Color: {Color} | Indoor: {(IsIndoor ? "Indoor" : "Outdoor")} | Vaccinated: {(IsVaccinated ? "Yes" : "No")} | Status: {Status}";
+              => $"Cat | Color: {Color} | {(IsIndoor ? "Indoor" : "Outdoor")} | Vaccinated: {(IsVaccinated ? "Yes" : "No")}";
 
     }
 }

@@ -35,6 +35,6 @@ namespace AnimalShelter.src.Models
             IsNocturnal = isNocturnal;
         }
         public override string GetSpeciesInfo()
-            => $"Small Animal | Name: {Name} | Age: {Age} | Type: {AnimalType} | Habitat: {Habitat} | Nocturnal: {(IsNocturnal ? "Yes" : "No")} | Status: {Status}";
+            => $"Small Animal | Type: {AnimalType} | Habitat: {Habitat} | Nocturnal: {(IsNocturnal ? "Yes" : "No")}";
     }
 }
