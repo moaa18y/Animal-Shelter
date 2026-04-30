@@ -109,7 +109,7 @@ namespace AnimalShelter.src.Models
 
         public void Adopt(string adopterName)
         {
-            if (!IsAvailable())
+            if (Status != AnimalStatus.Available && Status != AnimalStatus.PendingAdoption)
                 throw new InvalidOperationException($"'{Name}' is not available for adoption, Current Status: {Status}");
             if(string.IsNullOrWhiteSpace(adopterName))
                 throw new ArgumentException("Adopter name cannot be null or empty.", nameof(adopterName));

@@ -33,6 +33,6 @@ namespace AnimalShelter.src.Models
         }
 
         public override string GetSpeciesInfo()
-            => $"Dog | Name: {Name} | Age: {Age} | Breed: {Breed} | Size: {Size} | Vaccinated: {(IsVaccinated?"Yes":"No")} | Status: {Status}";
+            => $"Dog | Breed: {Breed} | Size: {Size} | Vaccinated: {(IsVaccinated?"Yes":"No")}";
     }
 }
