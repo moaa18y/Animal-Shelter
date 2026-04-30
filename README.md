@@ -41,15 +41,15 @@ Phase 4: Domain Rule Enforcement (Example: Adoption)
 • Validation: The request travels from Controller -> Service -> Domain Model (Animal.Adopt()).
 • Domain Security: The Animal class checks its own internal state. If it is Available or PendingAdoption, the adoption succeeds, the status changes, and a timestamped care note is added. If not, it throws an error preventing the action.
 
-# State Diagram
-<img width="1528" height="1305" alt="State Diagram" src="https://github.com/user-attachments/assets/2e4d2040-6c15-4fb8-a2a8-b12dec48937d" />
-
-# Class Diagram
-<img width="1757" height="1498" alt="Class Diagram" src="https://github.com/user-attachments/assets/696e833c-e8e6-47f5-af2a-86edb7c070b5" />
-
 Phase 5: Save & Exit
 
 • Exit Trigger: User selects 6 (Save and Exit). The Controller loop ends.
 • Persist Data: Control returns to Program.cs, which grabs all animals from the repository and passes them to ShelterFileHandler.SaveAll().
 • Write to Disk: The handler dynamically resolves the absolute path to the data folder, translates the data into a pipe-separated string format, and writes it to shelter_data.txt before the application closes.
 
+
+# State Diagram
+<img width="1528" height="1305" alt="State Diagram" src="https://github.com/user-attachments/assets/2e4d2040-6c15-4fb8-a2a8-b12dec48937d" />
+
+# Class Diagram
+<img width="1757" height="1498" alt="Class Diagram" src="https://github.com/user-attachments/assets/696e833c-e8e6-47f5-af2a-86edb7c070b5" />
