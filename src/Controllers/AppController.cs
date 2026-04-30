@@ -3,7 +3,7 @@ using animal_Shelter.UI;
 using AnimalShelter.src.Models;
 using AnimalShelter.src.UI;
 using animal_Shelter.Services;
-
+using System;
 namespace AnimalShelter.src.Controllers
 {
     public sealed class AppController
@@ -11,6 +11,8 @@ namespace AnimalShelter.src.Controllers
         private readonly IAnimalService _service;
 
         // The repository is injected, but we immediately wrap it in our Service layer.
+        // AppController always talks to IAnimalService — never to the repo directly.
+
         public AppController(IAnimalRepository repository)
         {
             _service = new AnimalService(repository);
@@ -27,7 +29,7 @@ namespace AnimalShelter.src.Controllers
             Console.WriteLine("  │  3. Search by name / ID / Status │");
             Console.WriteLine("  │  4. Update an animal's status    │");
             Console.WriteLine("  │  5. Remove an animal             │");
-            Console.WriteLine("  │  6. Exit                         │");
+            Console.WriteLine("  │  6. Save and Exit                │");
             Console.WriteLine("  └──────────────────────────────────┘");
             Console.ResetColor();
             Console.WriteLine();

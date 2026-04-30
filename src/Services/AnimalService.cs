@@ -1,6 +1,9 @@
 ﻿using animal_Shelter.Factory;
 using animal_Shelter.Repos;
 using AnimalShelter.src.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace animal_Shelter.Services
 {
@@ -10,7 +13,7 @@ namespace animal_Shelter.Services
 
         public AnimalService(IAnimalRepository repo)
         {
-            _repo = repo;
+            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
         public void AddAnimal(int type)
@@ -74,6 +77,13 @@ namespace animal_Shelter.Services
                 throw new Exception("Note cannot be empty");
             var animal = GetAnimal(id);
             animal.AddCareNote(note);
+        }
+
+        public void UpdateStatus(int id, AnimalStatus newStatus)
+        {
+            var animal = GetAnimal(id);
+            _repo.UpdateStatus(id, newStatus);
+            animal.AddCareNote($"Status changed to {newStatus}.");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 namespace animal_Shelter.UI
 {
     public class ConsoleInput

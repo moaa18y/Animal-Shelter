@@ -1,4 +1,7 @@
 ﻿using AnimalShelter.src.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AnimalShelter.src.UI
 {
@@ -48,9 +51,9 @@ namespace AnimalShelter.src.UI
             Console.WriteLine("---------------------------\n");
         }
 
-        public static void ShowSuccess(string message) => Console.WriteLine($"\n[SUCCESS] {message}");
-        public static void ShowError(string message) => Console.WriteLine($"\n[ERROR] {message}\n");
-        public static void ShowInfo(string message) => Console.WriteLine($"\n[INFO] {message}");
-        public static void ShowSectionHeader(string title) => Console.WriteLine($"\n=== {title.ToUpper()} ===");
+        public static void ShowSuccess(string message) { Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine($"\n[SUCCESS] {message}"); Console.ResetColor(); }
+        public static void ShowError(string message) { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine($"\n[ERROR] {message}\n"); Console.ResetColor(); }
+        public static void ShowInfo(string message) { Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine($"\n[INFO] {message}"); Console.ResetColor(); }
+        public static void ShowSectionHeader(string title) { Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine($"\n=== {title.ToUpper()} ==="); Console.ResetColor(); }
     }
 }

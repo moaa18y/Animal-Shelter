@@ -7,12 +7,28 @@
       "RelativeMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|solutionrelative:src\\ui\\animaldisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|c:\\users\\mo2men\\documents\\animalshelter\\src\\controllers\\appcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|solutionrelative:src\\controllers\\appcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|c:\\users\\mo2men\\documents\\animalshelter\\src\\repos\\animalmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|solutionrelative:src\\repos\\animalmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|c:\\users\\mo2men\\documents\\animalshelter\\src\\services\\animalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|solutionrelative:src\\services\\animalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|c:\\users\\mo2men\\documents\\animalshelter\\src\\services\\ianimalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|solutionrelative:src\\services\\ianimalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|c:\\users\\mo2men\\documents\\animalshelter\\src\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|solutionrelative:src\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|c:\\users\\mo2men\\documents\\animalshelter\\src\\repos\\shelterfilehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|solutionrelative:src\\repos\\shelterfilehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|c:\\users\\mo2men\\documents\\animalshelter\\src\\controllers\\appcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4EB4E5-2E57-4909-BB11-EE99B2A44929}|AnimalShelter.csproj|solutionrelative:src\\controllers\\appcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,24 +38,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AppController.cs",
-              "DocumentMoniker": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\Controllers\\AppController.cs",
-              "RelativeDocumentMoniker": "src\\Controllers\\AppController.cs",
-              "ToolTip": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\Controllers\\AppController.cs",
-              "RelativeToolTip": "src\\Controllers\\AppController.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAAAE0AAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T17:12:21.41Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -49,9 +52,22 @@
               "RelativeDocumentMoniker": "src\\UI\\AnimalDisplay.cs",
               "ToolTip": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\UI\\AnimalDisplay.cs",
               "RelativeToolTip": "src\\UI\\AnimalDisplay.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAuwAcAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAYwDgAAAC0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T17:11:22.343Z",
+              "WhenOpened": "2026-04-30T12:10:49.449Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AnimalManager.cs",
+              "DocumentMoniker": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\Repos\\AnimalManager.cs",
+              "RelativeDocumentMoniker": "src\\Repos\\AnimalManager.cs",
+              "ToolTip": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\Repos\\AnimalManager.cs",
+              "RelativeToolTip": "src\\Repos\\AnimalManager.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T12:10:42.434Z",
               "EditorCaption": ""
             },
             {
@@ -62,9 +78,61 @@
               "RelativeDocumentMoniker": "src\\Services\\AnimalService.cs",
               "ToolTip": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\Services\\AnimalService.cs",
               "RelativeToolTip": "src\\Services\\AnimalService.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAAwEsAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAAwFUAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T16:58:01.948Z",
+              "WhenOpened": "2026-04-30T12:10:24.949Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AppController.cs",
+              "DocumentMoniker": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\Controllers\\AppController.cs",
+              "RelativeDocumentMoniker": "src\\Controllers\\AppController.cs",
+              "ToolTip": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\Controllers\\AppController.cs",
+              "RelativeToolTip": "src\\Controllers\\AppController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwBYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T12:07:34.119Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Shelterfilehandler.cs",
+              "DocumentMoniker": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\Repos\\Shelterfilehandler.cs",
+              "RelativeDocumentMoniker": "src\\Repos\\Shelterfilehandler.cs",
+              "ToolTip": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\Repos\\Shelterfilehandler.cs",
+              "RelativeToolTip": "src\\Repos\\Shelterfilehandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEYAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T10:28:39.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Program.cs",
+              "ToolTip": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\Program.cs",
+              "RelativeToolTip": "src\\Program.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAAAsAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T10:24:01.472Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IAnimalService.cs",
+              "DocumentMoniker": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\Services\\IAnimalService.cs",
+              "RelativeDocumentMoniker": "src\\Services\\IAnimalService.cs",
+              "ToolTip": "C:\\Users\\Mo2men\\Documents\\AnimalShelter\\src\\Services\\IAnimalService.cs",
+              "RelativeToolTip": "src\\Services\\IAnimalService.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAA3wBQAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T10:08:46.599Z",
               "EditorCaption": ""
             }
           ]

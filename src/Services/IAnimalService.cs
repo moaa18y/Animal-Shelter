@@ -1,4 +1,5 @@
 ﻿using AnimalShelter.src.Models;
+using System.Collections.Generic;
 
 
 namespace animal_Shelter.Services
@@ -16,5 +17,8 @@ namespace animal_Shelter.Services
 
         void AdoptAnimal(int id, string adopterName);
         void AddCareNote(int id, string note);
+
+        // Needed for non-adoption status changes routed through the service layer
+        void UpdateStatus(int id, AnimalStatus newStatus);
     }
 }

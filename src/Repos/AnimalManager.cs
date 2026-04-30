@@ -1,5 +1,7 @@
 ﻿using AnimalShelter.src.Models;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace animal_Shelter.Repos
 {
@@ -17,7 +19,7 @@ namespace animal_Shelter.Repos
         //IAnimalRepository implementation
         public int Count => _animals.Count;
 
-        public int NextId() => _nextId++;
+        public int NextId() => _nextId;
 
         public void Add(Animal animal)
         {
@@ -27,6 +29,12 @@ namespace animal_Shelter.Repos
                 throw new InvalidOperationException(
                     $"An animal with ID {animal.Id} already exists.");
             _animals.Add(animal);
+
+            // Ensure _nextId is always greater than any existing ID
+            if (animal.Id >= _nextId)
+            {
+                _nextId = animal.Id + 1;
+            }
         }
 
         public bool Remove(int id)
