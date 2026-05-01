@@ -149,7 +149,7 @@ namespace AnimalShelter.src.Controllers
                 }
                 else
                 {
-                    animal.Status = newStatus;
+                    _service.UpdateStatus(id, newStatus);
                     _service.AddCareNote(id, $"Status changed to {newStatus}.");
                 }
 

@@ -7,13 +7,10 @@ using AnimalShelter.src.Models;
 namespace AnimalShelter.src.Repos
 {
     // This class only handles reading and writing animals to a text file.
-    // It knows nothing about the menu, display, or business logic.
     public class ShelterFileHandler
     {
-        // The path to the data file (created automatically if it does not exist)
         private readonly string _filePath;
 
-        // Separator character between fields on each line
         private const char SEP = '|';
 
         public ShelterFileHandler(string filePath)
@@ -21,20 +18,16 @@ namespace AnimalShelter.src.Repos
             _filePath = filePath;
         }
 
-        // Writes every animal to the file as one line each.
-        // Format: Type|Id|Name|Age|Status|AdopterName|f1|f2|f3
         public void SaveAll(IReadOnlyList<Animal> animals)
         {
             try
             {
-                // The absolute path to ensure the directory is created correctly
                 string fullPath = Path.GetFullPath(_filePath);
                 string dir = Path.GetDirectoryName(fullPath);
 
                 if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
                     Directory.CreateDirectory(dir);
 
-                // append:false means we always overwrite (fresh save every time)
                 using var writer = new StreamWriter(fullPath, append: false);
 
                 foreach (var animal in animals)
@@ -79,10 +72,8 @@ namespace AnimalShelter.src.Repos
         {
             var result = new List<Animal>();
 
-            // absolute path
             string fullPath = Path.GetFullPath(_filePath);
 
-            // If no file exists yet — start with an empty shelter
             if (!File.Exists(fullPath))
                 return result;
 
@@ -99,7 +90,6 @@ namespace AnimalShelter.src.Repos
 
                     try
                     {
-                        // Split each line back into its fields
                         string[] p = line.Split(SEP);
 
                         // Shared fields: [0]=type [1]=id [2]=name [3]=age [4]=status [5]=adopterName
@@ -144,7 +134,6 @@ namespace AnimalShelter.src.Repos
                             _ => throw new NotSupportedException($"Unknown type '{typeName}'")
                         };
 
-                        // Re-attach the adopter name if the animal was already adopted
                         if (status == AnimalStatus.Adopted && !string.IsNullOrWhiteSpace(adopterName))
                             animal.Adopt(adopterName);
 
@@ -152,7 +141,7 @@ namespace AnimalShelter.src.Repos
                     }
                     catch (Exception ex)
                     {
-                        // Skip bad lines — do not crash the whole load
+                        // Skip bad lines
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine($"[FILE WARN] Skipping line {lineNumber}: {ex.Message}");
                         Console.ResetColor();

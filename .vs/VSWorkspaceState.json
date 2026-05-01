@@ -1,18 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src",
-<<<<<<< HEAD
-    "\\src\\Models"
+    "\\src"
   ],
-  "SelectedNode": "\\src\\Models\\Animal.cs",
-=======
-    "\\src\\Controllers",
-    "\\src\\Repos",
-    "\\src\\Services",
-    "\\src\\UI"
-  ],
-  "SelectedNode": "\\src\\Services\\AnimalService.cs",
->>>>>>> 79eca1fd2ec20ecfb3ebba6f618d17f2af430c76
+  "SelectedNode": "\\src\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
