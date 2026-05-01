@@ -67,23 +67,23 @@ namespace animal_Shelter.Services
         {
             if (string.IsNullOrWhiteSpace(adopterName))
                 throw new Exception("Adopter name is required");
-            var animal = GetAnimal(id);
-            animal.Adopt(adopterName);
+            //var animal = GetAnimal(id);
+            _repo.Adopt(id,adopterName);
         }
 
         public void AddCareNote(int id, string note)
         {
             if (string.IsNullOrWhiteSpace(note))
                 throw new Exception("Note cannot be empty");
-            var animal = GetAnimal(id);
-            animal.AddCareNote(note);
+            //var animal = GetAnimal(id);
+            _repo.AddCareNote(id,note);
         }
 
         public void UpdateStatus(int id, AnimalStatus newStatus)
         {
-            var animal = GetAnimal(id);
+            //var animal = GetAnimal(id);
             _repo.UpdateStatus(id, newStatus);
-            animal.AddCareNote($"Status changed to {newStatus}.");
+            //_repo.AddCareNote(id,$"Status changed to {newStatus}.");
         }
     }
 }

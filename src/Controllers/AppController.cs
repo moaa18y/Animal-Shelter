@@ -13,9 +13,9 @@ namespace AnimalShelter.src.Controllers
         // The repository is injected, but we immediately wrap it in our Service layer.
         // AppController always talks to IAnimalService — never to the repo directly.
 
-        public AppController(IAnimalRepository repository)
+        public AppController(IAnimalService service)
         {
-            _service = new AnimalService(repository);
+            _service = service;
         }
 
         private static void PrintMenu()
@@ -150,10 +150,12 @@ namespace AnimalShelter.src.Controllers
                 else
                 {
                     _service.UpdateStatus(id, newStatus);
-                    _service.AddCareNote(id, $"Status changed to {newStatus}.");
+                    //_service.AddCareNote(id, $"Status changed to {newStatus}.");
                 }
+                var updatedAnimal = _service.GetAnimal(id);
 
-                AnimalDisplay.ShowSuccess($"{animal.Name} status updated to {animal.Status}.");
+
+                AnimalDisplay.ShowSuccess($"{updatedAnimal.Name} status updated to {updatedAnimal.Status}.");
             }
             catch (Exception ex) { AnimalDisplay.ShowError(ex.Message); }
         }

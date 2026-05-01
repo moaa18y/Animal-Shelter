@@ -1,4 +1,5 @@
 ﻿using animal_Shelter.Repos;
+using animal_Shelter.Services;
 using AnimalShelter.src.Controllers;
 using AnimalShelter.src.Repos;
 using System;
@@ -16,25 +17,20 @@ namespace animal_Shelter
             Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\data\shelter_data.txt")
         );
 
+        
+
         static void Main(string[] args)
         {
             Console.Title = "Animal Shelter Management System";
 
-            // 1. Set up the data layer
-            IAnimalRepository repository = new AnimalManager();
+
             var fileHandler = new ShelterFileHandler(DataFile);
 
-            // 2. Load saved data from the previous session (if any)
-            var savedAnimals = fileHandler.LoadAll();
-            foreach (var animal in savedAnimals)
-                repository.Add(animal);
-
-            // 3. Start the application
-            var controller = new AppController(repository);
+            IAnimalRepository repoFile = new AnimalFileRepository(fileHandler);
+            IAnimalService service = new AnimalService(repoFile);
+            var controller = new AppController(service);
             controller.Run();
 
-            // 4. Save all data when the user exits
-            fileHandler.SaveAll(repository.GetAll());
         }
     }
 }

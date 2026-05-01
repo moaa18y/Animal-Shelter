@@ -54,7 +54,7 @@ namespace AnimalShelter.src.Repos
                 }
                 
                 Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine($"\n[FILE] {animals.Count} record(s) saved to {fullPath}");
+                //Console.WriteLine($"\n[FILE] {animals.Count} record(s) saved to {fullPath}");
                 Console.ResetColor();
             }
             catch (IOException ex)

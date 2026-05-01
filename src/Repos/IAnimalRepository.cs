@@ -19,6 +19,9 @@ namespace animal_Shelter.Repos
         List<Animal> FindByName(string name);
         List<Animal> FindByStatus(AnimalStatus status);
 
+        void Adopt(int id, string adopterName);
+        void AddCareNote(int id, string note);
+
         void UpdateStatus(int id, AnimalStatus newStatus);
 
         IReadOnlyList<Animal> GetAll();
