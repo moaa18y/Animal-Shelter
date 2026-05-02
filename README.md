@@ -55,6 +55,7 @@ data/
 ```
 
 # Class Diagram
+<img width="4096" height="1489" alt="class_diagram" src="https://github.com/user-attachments/assets/364228b1-d780-4ff9-b4b6-30f88a208db7" />
 
 
 ---
@@ -81,6 +82,7 @@ Program.cs
 An enum defining 4 lifecycle states.
 
 # State Diagram
+<img width="692" height="811" alt="State Diagram" src="https://github.com/user-attachments/assets/569e320a-c005-418b-88a0-0892a2b897e6" />
 
 
 ### `IAdoptable.cs` and `ICareRecord.cs`
