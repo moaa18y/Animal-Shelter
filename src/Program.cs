@@ -13,9 +13,9 @@ namespace animal_Shelter
         // 1. Gets the current running directory (bin/Debug/netX.0/)
         // 2. Uses @"..\..\..\" to step up 3 folder levels to your project root
         // 3. Combines it with the data folder and file name
-        private static readonly string DataFile = Path.GetFullPath(
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\data\shelter_data.txt")
-        );
+        //private static readonly string DataFile = Path.GetFullPath(
+        //    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\data\shelter_data.txt")
+        //);
 
         
 
