@@ -1,11 +1,10 @@
-﻿using Animal_Shelter_V2.GlobalFiles;
-using Animal_Shelter_V2.src.Models.implementation;
+﻿using Animal_Shelter_V2.src.Models.implementation;
+
 using System.Collections.Generic;
 
 
-namespace Animal_Shelter_V2.src.Services.Interface
-{
-    public interface IAnimalService
+
+public interface IAnimalService
     {
         void AddAnimal(int type);
         bool RemoveAnimal(int id);
@@ -22,4 +21,4 @@ namespace Animal_Shelter_V2.src.Services.Interface
         // Needed for non-adoption status changes routed through the service layer
         void UpdateStatus(int id, AnimalStatus newStatus);
     }
-}
+

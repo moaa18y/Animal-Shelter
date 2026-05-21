@@ -1,5 +1,5 @@
-﻿using Animal_Shelter_V2.GlobalFiles;
-using Animal_Shelter_V2.src.Models.implementation;
+﻿using Animal_Shelter_V2.src.Models.implementation;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
