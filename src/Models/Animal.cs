@@ -1,9 +1,8 @@
-using Animal_Shelter_V2.GlobalFiles;
 using Animal_Shelter_V2.src.Models;
-using Animal_Shelter_V2.src.Models.Interface;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+
 
 
 public  class Animal :BaseEntity      //: ICareRecord, IAdoptable
@@ -22,7 +21,7 @@ public  class Animal :BaseEntity      //: ICareRecord, IAdoptable
         public string Status { get; set; }=AnimalStatus.Available.ToString();// Default status is set to "Available"
 
 
-        public ICollection<Vaccine> Vaccines { get; set; }
+        public List<Vaccine> Vaccines { get; set; }
 
        
 

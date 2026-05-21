@@ -1,116 +1,114 @@
-﻿using Animal_Shelter_V2.GlobalFiles;
-using Animal_Shelter_V2.src.Models.implementation;
+﻿
 using Animal_Shelter_V2.src.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Animal_Shelter_V2.src.Repositories.Implementations
 {
-    public class AnimalFileRepository : IAnimalRepository
+    public class AnimalFileRepository //: IAnimalRepository
     {
-        private readonly List<Animal> _animals = new();
-        private readonly ShelterFileHandler _fileHandler;
-        private int _nextId = 1;
+        //private readonly List<Animal> _animals = new();
+        //private readonly ShelterFileHandler _fileHandler;
+        //private int _nextId = 1;
 
-        public AnimalFileRepository(ShelterFileHandler FileHandler)
-        {
-            _fileHandler = FileHandler;
-            var loaded = _fileHandler.LoadAll();
-            _animals.AddRange(loaded);
+        //public AnimalFileRepository(ShelterFileHandler FileHandler)
+        //{
+        //    _fileHandler = FileHandler;
+        //    var loaded = _fileHandler.LoadAll();
+        //    _animals.AddRange(loaded);
 
-            if (_animals.Any())
-                _nextId = _animals.Max(a => a.Id) + 1;
+        //    if (_animals.Any())
+        //        _nextId = _animals.Max(a => a.Id) + 1;
 
-        }
+        //}
 
-        public int Count => _animals.Count;
+        //public int Count => _animals.Count;
 
-        public int NextId() => _nextId;
-
-
-        private void Save() => _fileHandler.SaveAll(_animals);
+        //public int NextId() => _nextId;
 
 
-        public void Add(Animal animal)
-        {
-            if (animal == null)
-                throw new ArgumentNullException(nameof(animal));
+        //private void Save() => _fileHandler.SaveAll(_animals);
 
-            if (_animals.Any(a => a.Id == animal.Id))
-                throw new InvalidOperationException("Duplicate ID");
 
-            _animals.Add(animal);
+        //public void Add(Animal animal)
+        //{
+        //    if (animal == null)
+        //        throw new ArgumentNullException(nameof(animal));
 
-            if (animal.Id >= _nextId)
-                _nextId = animal.Id + 1;
+        //    if (_animals.Any(a => a.Id == animal.Id))
+        //        throw new InvalidOperationException("Duplicate ID");
 
-            Save();
-        }
+        //    _animals.Add(animal);
 
-        public bool Remove(int id)
-        {
+        //    if (animal.Id >= _nextId)
+        //        _nextId = animal.Id + 1;
+
+        //    Save();
+        //}
+
+        //public bool Remove(int id)
+        //{
             
-            var animal = FindById(id);
-            if (animal == null) return false;
+        //    var animal = FindById(id);
+        //    if (animal == null) return false;
 
-            _animals.Remove(animal);
-            Save();
-            return true;
-        }
+        //    _animals.Remove(animal);
+        //    Save();
+        //    return true;
+        //}
 
-        public void UpdateStatus(int id, AnimalStatus newStatus)
-        {
-            var animal = FindById(id);
-            if (animal == null)
-                throw new Exception("Animal not found");
+        //public void UpdateStatus(int id, AnimalStatus newStatus)
+        //{
+        //    var animal = FindById(id);
+        //    if (animal == null)
+        //        throw new Exception("Animal not found");
 
-            animal.Status = newStatus;
-            animal.AddCareNote($"Status changed to {newStatus}.");
+        //    animal.Status = newStatus;
+        //    animal.AddCareNote($"Status changed to {newStatus}.");
 
-            Save();
-        }
+        //    Save();
+        //}
 
-        public Animal FindById(int id)
-           => _animals.FirstOrDefault(a => a.Id == id);
+        //public Animal FindById(int id)
+        //   => _animals.FirstOrDefault(a => a.Id == id);
 
-        public List<Animal> FindByName(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Name cannot be empty");
+        //public List<Animal> FindByName(string name)
+        //{
+        //    if (string.IsNullOrWhiteSpace(name))
+        //        throw new ArgumentException("Name cannot be empty");
 
-            return _animals
-                .Where(a => a.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-        }
+        //    return _animals
+        //        .Where(a => a.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+        //        .ToList();
+        //}
 
-        public List<Animal> FindByStatus(AnimalStatus status)
-            => _animals.Where(a => a.Status == status).ToList();
+        //public List<Animal> FindByStatus(AnimalStatus status)
+        //    => _animals.Where(a => a.Status == status).ToList();
 
-        public void Adopt(int id, string adopterName)
-        {
-            var animal = FindById(id);
-            if (animal == null)
-                throw new Exception("Animal not found");
+        //public void Adopt(int id, string adopterName)
+        //{
+        //    var animal = FindById(id);
+        //    if (animal == null)
+        //        throw new Exception("Animal not found");
 
-            animal.Adopt(adopterName);
-            Save(); 
-        }
+        //    animal.Adopt(adopterName);
+        //    Save(); 
+        //}
 
-        public void AddCareNote(int id, string note)
-        {
-            var animal = FindById(id);
-            if (animal == null)
-                throw new Exception("Animal not found");
+        //public void AddCareNote(int id, string note)
+        //{
+        //    var animal = FindById(id);
+        //    if (animal == null)
+        //        throw new Exception("Animal not found");
 
-            animal.AddCareNote(note);
-            Save(); 
-        }
+        //    animal.AddCareNote(note);
+        //    Save(); 
+        //}
 
-        public IReadOnlyList<Animal> GetAll()
-            => _animals.OrderBy(a => a.Id).ToList().AsReadOnly();
+        //public IReadOnlyList<Animal> GetAll()
+        //    => _animals.OrderBy(a => a.Id).ToList().AsReadOnly();
 
     }
 }

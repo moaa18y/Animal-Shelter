@@ -1,13 +1,12 @@
-﻿using Animal_Shelter_V2.src.Models.implementation;
+﻿
 using System;
-using System.Collections.Generic;
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Animal_Shelter_V2.src.Models
 {
-    internal class Adoption: BaseEntity
+    public class Adoption: BaseEntity
     {
         [Key]
         public int Id { get; set; }

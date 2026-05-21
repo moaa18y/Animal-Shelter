@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using Animal_Shelter_V2.src.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace Animal_Shelter_V2.src.Models
-{
-    internal class User :BaseEntity
+
+
+    public class User :BaseEntity
     {
         [Key]
         public int UserId { get; set; }
@@ -28,4 +27,4 @@ namespace Animal_Shelter_V2.src.Models
 
         
     }
-}
+
