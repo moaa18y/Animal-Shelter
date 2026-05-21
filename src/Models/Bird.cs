@@ -1,39 +1,34 @@
-﻿using System;
+﻿using Animal_Shelter_V2.GlobalFiles;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnimalShelter.src.Models
+namespace Animal_Shelter_V2.src.Models.implementation
 {
     public sealed class Bird : Animal
     {
-        private string _species;
-        private string _wingspan;
+        [Required]
+        public string Species {  get; set; }
 
-        public string Species
-        {
-            get => _species;
-            set => _species = string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
-        }
-        public string WingSpan
-        {
-            get => _wingspan;
-            set => _wingspan = string.IsNullOrWhiteSpace(value) ? "Medium" : value.Trim();
-        }
+        [Required]
+        public string WingSpan { get; set; }
 
+        [Required]
         public bool CanFly { get; set; }
 
 
-        public Bird(int id, string name, int age,string species,bool canFly,string wingspan, AnimalStatus status = AnimalStatus.Available) 
-            : base(id, name, age, status)
-        {
-            Species = species;
-            CanFly = canFly;
-            WingSpan = wingspan;
-        }
+        //public Bird(int id, string name, int age,string species,bool canFly,string wingspan, AnimalStatus status = AnimalStatus.Available) 
+        //    : base(id, name, age, status)
+        //{
+        //    Species = species;
+        //    CanFly = canFly;
+        //    WingSpan = wingspan;
+        //}
 
-        public override string GetSpeciesInfo()
-            => $"Bird | Species: {Species} | Can Fly: {(CanFly ? "Yes" : "No")} | Wingspan: {WingSpan}";
+        //public override string GetSpeciesInfo()
+        //    => $"Bird | Species: {Species} | Can Fly: {(CanFly ? "Yes" : "No")} | Wingspan: {WingSpan}";
     }
 }
