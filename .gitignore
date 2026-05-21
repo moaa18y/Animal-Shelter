@@ -56,3 +56,6 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 /.vs/AnimalShelter
+/.vs/ProjectEvaluation/animalshelter.metadata.v10.bin
+/.vs/ProjectEvaluation/animalshelter.projects.v10.bin
+/.vs/ProjectEvaluation/animalshelter.strings.v10.bin

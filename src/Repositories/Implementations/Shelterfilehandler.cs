@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using AnimalShelter.src.Models;
+using Animal_Shelter_V2.GlobalFiles;
+using Animal_Shelter_V2.src.Models;
+using Animal_Shelter_V2.src.Models.implementation;
 
 
-namespace AnimalShelter.src.Repos
-{
+
     // This class only handles reading and writing animals to a text file.
     public class ShelterFileHandler
     {
@@ -161,4 +162,3 @@ namespace AnimalShelter.src.Repos
             return result;
         }
     }
-}
