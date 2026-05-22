@@ -17,5 +17,14 @@ namespace AnimalShelter.DbForMigration
         public DbSet<Vaccine> Vaccines { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasQueryFilter(u => !u.IsDeleted);
+
+            modelBuilder.Entity<Animal>()
+                .HasQueryFilter(a => a.Status != AnimalStatus.Adopted);
+        }
     }
 }

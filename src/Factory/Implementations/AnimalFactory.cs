@@ -1,7 +1,4 @@
-﻿using animal_Shelter.UI;
-using Animal_Shelter_V2.src.Factory.Interfaces;
-using Animal_Shelter_V2.src.Models;
-using Animal_Shelter_V2.src.Models.implementation;
+﻿
 
 namespace Animal_Shelter_V2.src.Factory.Implementations
 {

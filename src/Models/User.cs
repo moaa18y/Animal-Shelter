@@ -1,10 +1,13 @@
 ﻿
 using Animal_Shelter_V2.src.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
 
+[Index(nameof(UserEmail),IsUnique =true)]
     public class User :BaseEntity
     {
         [Key]
@@ -24,6 +27,10 @@ using System.ComponentModel.DataAnnotations.Schema;
         
         [ForeignKey("RoleId")]
         public Role Role { get; set; }
+
+    public bool IsDeleted { get; set; } = false;
+
+    public List<Adoption> Adoptions { get; set; }
 
         
     }

@@ -37,6 +37,7 @@ public class AuthoServices : IAutho
         return new UserDto
         {
             Username = user.UserName,
+            Email = user.UserEmail,
             Role = user.Role.RoleName
         };
     }

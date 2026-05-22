@@ -18,8 +18,9 @@ public  class Animal :BaseEntity      //: ICareRecord, IAdoptable
         public int Age { get; set; }
 
 
-        public string Status { get; set; }=AnimalStatus.Available.ToString();// Default status is set to "Available"
+        public AnimalStatus Status { get; set; }=AnimalStatus.Available;// Default status is set to "Available"
 
+        public Adoption Adoption { get; set; }
 
         public List<Vaccine> Vaccines { get; set; }
 
