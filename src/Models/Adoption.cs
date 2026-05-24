@@ -19,6 +19,6 @@ namespace Animal_Shelter_V2.src.Models
         [ForeignKey("AnimalId")]
         public Animal Animal { get; set; }
 
-        public DateTime AdoptedAt { get; set; }= DateTime.Now; //Default value set to current date and time
+        public DateTime AdoptedAt { get; set; }= DateTime.Now; 
     }
 }
