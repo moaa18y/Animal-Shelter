@@ -20,7 +20,7 @@ namespace AnimalShelter.src.Services.Implementation
         {
             userRepo = _userRepo;
         }
-        public void AddUser(CreateUserDto UserDto)
+        public void AddUser(CreateUserDto UserDto, string CreatedBy)
         {
             if (_userRepo.GetUserByEmail(UserDto.UserEmail) is not null)
                 throw new UserAlreadyExist();
@@ -34,22 +34,25 @@ namespace AnimalShelter.src.Services.Implementation
             };
 
             user.UserPassword = hasher.HashPassword(user, UserDto.UserPassword);
-
+            user.CreatedBy = CreatedBy;
             _userRepo.AddUser(user);
             _userRepo.SaveChange();
 
 
         }
 
-        public void DeleteUser(string email)
+        public void DeleteUser(string email, string DeletedBy)
         {
             var user = _userRepo.GetUserByEmail(email);
             if(user is null)
             {
                 throw new UserNotFoundException();
             }
-
-            _userRepo.DeleteUser(user);
+            
+            
+            user.IsDeleted= true;
+            user.DeletedAt= DateTime.Now;
+            user.DeletedBy= DeletedBy;
             _userRepo.SaveChange();
 
         }
@@ -64,16 +67,16 @@ namespace AnimalShelter.src.Services.Implementation
                 Username = u.UserName,
                 Email = u.UserEmail,
                 Role=u.Role.RoleName,
-                Adoptions= u.Adoptions.Select(a=> new AdoptionsForUser
+                Adoptions= u.Adoptions.Select(a=> new AdoptionsDto
                 {
                     id = a.AdoptionId,
                     AdoptedAt=a.AdoptedAt,
-                    Animal=new AnimalAdoptionForUser
+                    Animal=new AnimalDto
                     {
                         id=a.AnimalId,
                         name=a.Animal.Name,
                         age=a.Animal.Age,
-                        Vaccines=a.Animal.Vaccines.Select(v=>new VaccineForEachAnimalAdoptByUser
+                        Vaccines=a.Animal.Vaccines.Select(v=>new GetVaccineDto
                         {
                             Id=v.VaccineId,
                             VaccineName=v.VaccineName,
@@ -101,16 +104,16 @@ namespace AnimalShelter.src.Services.Implementation
                 Username = user.UserName,
                 Email = user.UserEmail,
                 Role = user.Role.RoleName,
-                Adoptions = user.Adoptions.Select(a => new AdoptionsForUser
+                Adoptions = user.Adoptions.Select(a => new AdoptionsDto
                 {
                     id = a.AdoptionId,
                     AdoptedAt = a.AdoptedAt,
-                    Animal = new AnimalAdoptionForUser
+                    Animal = new AnimalDto
                     {
                         id = a.AnimalId,
                         name = a.Animal.Name,
                         age = a.Animal.Age,
-                        Vaccines = a.Animal.Vaccines.Select(v => new VaccineForEachAnimalAdoptByUser
+                        Vaccines = a.Animal.Vaccines.Select(v => new GetVaccineDto
                         {
                             Id = v.VaccineId,
                             VaccineName = v.VaccineName,

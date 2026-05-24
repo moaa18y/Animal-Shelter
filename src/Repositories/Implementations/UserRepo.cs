@@ -28,16 +28,6 @@ namespace AnimalShelter.src.Repositories.Implementations
 
         }
 
-        
-
-        public void DeleteUser(User user)
-        {
-            
-            user.IsDeleted = true;
-            
-
-        }
-
 
 
        public List<User> GetAllUsers()

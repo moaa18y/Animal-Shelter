@@ -14,7 +14,7 @@ using System.Text;
 
         public EnumRole Role { get; set; }
 
-        public  List<AdoptionsForUser> Adoptions { get; set; }
+        public  List<AdoptionsDto> Adoptions { get; set; }
 
     }
 

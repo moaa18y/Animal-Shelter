@@ -28,7 +28,7 @@ using System.ComponentModel.DataAnnotations.Schema;
         [ForeignKey("RoleId")]
         public Role Role { get; set; }
 
-    public bool IsDeleted { get; set; } = false;
+    
 
     public List<Adoption> Adoptions { get; set; }
 

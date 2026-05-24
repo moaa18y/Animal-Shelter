@@ -5,12 +5,12 @@ using System.Text;
 
 namespace AnimalShelter.Dto
 {
-    public class AdoptionsForUser
+    public class AdoptionsDto
     {
         public int id {  get; set; }
 
         public DateTime AdoptedAt { get; set; }
 
-        public AnimalAdoptionForUser Animal { get; set; }
+        public AnimalDto Animal { get; set; }
     }
 }
