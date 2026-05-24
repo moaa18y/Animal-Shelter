@@ -11,6 +11,6 @@ namespace AnimalShelter.Dto
 
         public DateTime AdoptedAt { get; set; }
 
-        public AllAnimalsAdoptionForUser Animal { get; set; }
+        public AnimalAdoptionForUser Animal { get; set; }
     }
 }

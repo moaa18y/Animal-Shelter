@@ -40,19 +40,20 @@ namespace AnimalShelter.src.Repositories.Implementations
 
 
 
-        List<User> IUserRepo.GetAllUsers()
+       public List<User> GetAllUsers()
         {
 
             return _dbContext.Users
             .Include(u => u.Role)
             .Include(u => u.Adoptions)
             .ThenInclude(a => a.Animal)
-                .ThenInclude(an => an.Vaccines).ToList();
+                .ThenInclude(an => an.Vaccines)
+                .AsNoTracking().ToList();
         }
 
         
 
-        public User? GetUserByEmail(string email)
+        public User GetUserByEmail(string email)
         {
             return _dbContext.Users
                 .Include(u => u.Role)
@@ -63,7 +64,16 @@ namespace AnimalShelter.src.Repositories.Implementations
         }
 
 
+        public User GetUserByEmailReadOnly(string email)
+        {
+            return _dbContext.Users
+                .Include(u => u.Role)
+                .Include(u => u.Adoptions)
+                    .ThenInclude(a => a.Animal)
+                        .ThenInclude(an => an.Vaccines).AsNoTracking()
+                .FirstOrDefault(u => u.UserEmail == email);
 
+        }
 
         public void SaveChange()
         {

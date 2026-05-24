@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AnimalShelter.src.Services.Implementation
@@ -48,18 +49,78 @@ namespace AnimalShelter.src.Services.Implementation
                 throw new UserNotFoundException();
             }
 
-            throw new NotImplementedException();
+            _userRepo.DeleteUser(user);
+            _userRepo.SaveChange();
+
         }
 
         public List<UserDto> GetAllUsers()
         {
-            throw new NotImplementedException();
+
+            var users = _userRepo.GetAllUsers();
+            return users.Select(u => new UserDto
+            {
+                Id = u.UserId,
+                Username = u.UserName,
+                Email = u.UserEmail,
+                Role=u.Role.RoleName,
+                Adoptions= u.Adoptions.Select(a=> new AdoptionsForUser
+                {
+                    id = a.AdoptionId,
+                    AdoptedAt=a.AdoptedAt,
+                    Animal=new AnimalAdoptionForUser
+                    {
+                        id=a.AnimalId,
+                        name=a.Animal.Name,
+                        age=a.Animal.Age,
+                        Vaccines=a.Animal.Vaccines.Select(v=>new VaccineForEachAnimalAdoptByUser
+                        {
+                            Id=v.VaccineId,
+                            VaccineName=v.VaccineName,
+                            VaccineDate=v.VaccineDate
+
+                        }).ToList()
+                    }
+                }).ToList()
+               
+            }).ToList();
+
         }
 
         public UserDto GetUserByEmail(string email)
         {
 
-            throw new NotImplementedException();
+            var user = _userRepo.GetUserByEmailReadOnly(email);
+            if(user is null)
+            {
+                throw new UserNotFoundException();
+            }
+            return  new UserDto
+            {
+                Id = user.UserId,
+                Username = user.UserName,
+                Email = user.UserEmail,
+                Role = user.Role.RoleName,
+                Adoptions = user.Adoptions.Select(a => new AdoptionsForUser
+                {
+                    id = a.AdoptionId,
+                    AdoptedAt = a.AdoptedAt,
+                    Animal = new AnimalAdoptionForUser
+                    {
+                        id = a.AnimalId,
+                        name = a.Animal.Name,
+                        age = a.Animal.Age,
+                        Vaccines = a.Animal.Vaccines.Select(v => new VaccineForEachAnimalAdoptByUser
+                        {
+                            Id = v.VaccineId,
+                            VaccineName = v.VaccineName,
+                            VaccineDate = v.VaccineDate
+
+                        }).ToList()
+                    }
+                }).ToList()
+
+            };
         }
 
         public void UpdateUser(string email, UpdateUserDto UpdateUser, string updatedBy)
