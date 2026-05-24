@@ -12,12 +12,14 @@ namespace Animal_Shelter_V2.src.Models
         public int AdoptionId { get; set; }
 
         public int UserId { get; set; }
+
         [ForeignKey("UserId")]
         public User User { get; set; }
 
         public int AnimalId { get; set; }
         [ForeignKey("AnimalId")]
         public Animal Animal { get; set; }
+
 
         public DateTime AdoptedAt { get; set; }= DateTime.Now; 
     }
