@@ -8,15 +8,15 @@ namespace AnimalShelter.src.Repositories.Interfaces
 {
     public interface IUserRepo
     {
-        void AddUser(CreateUserDto UserDto);
+        void AddUser(User user);
 
-        List<UserDto> GetAllUsers();
-        UserDto GetUsers(GetUserDto getUser);
+        List<User> GetAllUsers();
 
-        void DeleteUser(GetUserDto user);
+        User GetUserByEmail(string email);
 
-        void UpdateUserName(GetUserDto GetUser,UpdateUserDto UpdateUserName,UserDto CurrentUser);
-        
+        public void DeleteUser(User user);
+
+        public void SaveChange();
 
     }
 }

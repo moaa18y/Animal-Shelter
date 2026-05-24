@@ -23,7 +23,7 @@ using System.ComponentModel.DataAnnotations.Schema;
         [Required]
         public string UserPassword { get; set; }
 
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; }
         
         [ForeignKey("RoleId")]
         public Role Role { get; set; }
