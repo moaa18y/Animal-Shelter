@@ -9,7 +9,7 @@ namespace Animal_Shelter_V2.src.Models
     public class Adoption: BaseEntity
     {
         [Key]
-        public int Id { get; set; }
+        public int AdoptionId { get; set; }
 
         public int UserId { get; set; }
         [ForeignKey("UserId")]

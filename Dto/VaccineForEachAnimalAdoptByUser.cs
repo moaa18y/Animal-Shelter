@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AnimalShelter.Dto
 {
-    public class AllVaccinesForEachAnimalAdoptByUser
+    public class VaccineForEachAnimalAdoptByUser
     {
         public int Id { get; set; }
 
