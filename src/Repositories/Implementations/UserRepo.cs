@@ -33,6 +33,11 @@ namespace AnimalShelter.src.Repositories.Implementations
            
         }
 
+        public User FindByEmail(string email)
+        {
+            return _dbContext.Users.FirstOrDefault(u => u.UserEmail == email);
+        }
+
         public void DeleteUser(GetUserDto Getuser)
         {
             var user=_dbContext.Users.FirstOrDefault(u=> u.UserEmail== Getuser.Email);
