@@ -24,7 +24,7 @@ namespace Animal_Shelter.src.Services.Implementation
             _adoptionRepo = adoptionRepo ?? throw new RepoNotFoundException(nameof(adoptionRepo));
             _userRepo = userRepo ?? throw new RepoNotFoundException(nameof(userRepo));
         }
-        public void AdoptAnimal(int animal_id, string adopter_id)
+        public void AdoptAnimal(int animal_id, int adopter_id)
         {
 
             var animal = _animalRepo.FindById(animal_id);
@@ -34,22 +34,22 @@ namespace Animal_Shelter.src.Services.Implementation
             if (animal.Status == EnumAnimalStatus.Adopted)
                 throw new AnimalAlreadyAdoptedException(animal.Id, animal.Name);
 
-           // var user = _userRepo.GetUserById(adopter_id);
-            //if (user == null)
-            //    throw new AdopterNotFoundException();
+            var user = _userRepo.GetUserById(adopter_id);
+            if (user == null)
+                throw new AdopterNotFoundException();
 
-            //var adoption = new Adoption
-            //{
-            //    AnimalId = animal.Id,
-            //    Animal = animal,
-            //    UserId = user.UserId,
-            //    User = user,            
-            //    CreatedBy = user.UserName
-            //};
-            //animal.Status = EnumAnimalStatus.Adopted;
-            //animal.Adoption = adoption;
+            var adoption = new Adoption
+            {
+                AnimalId = animal.Id,
+                Animal = animal,
+                UserId = user.UserId,
+                User = user,
+                CreatedBy = user.UserName
+            };
+            animal.Status = EnumAnimalStatus.Adopted;
+            animal.Adoption = adoption;
 
-            //_repo.AddAdoption(adoption);
+            _adoptionRepo.AddAdoption(adoption);
         }
     }
 }

@@ -12,13 +12,13 @@ namespace AnimalShelter.src.Repositories.Interfaces
         void AddUser(User user);
 
         List<User> GetAllUsers();
-        public User GetUserById(int id);
+         User GetUserById(int id);
 
         User GetUserByEmail(string email);
 
         User GetUserByEmailReadOnly(string email);
 
-
+        
          void SaveChange();
 
     }
