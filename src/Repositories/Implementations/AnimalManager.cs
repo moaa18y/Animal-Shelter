@@ -1,4 +1,3 @@
-﻿
 using Animal_Shelter_V2.src.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -66,7 +65,7 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
 
             if (animal != null)
             {
-                animal.Status = EnumAnimalStatus.Adopted;
+                animal.Status = AnimalStatus.Adopted;
                 animal.Adoption = adoption;
             }
 
