@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class AuthoServices : IAutho
+public class AuthoServices : IAuthoService
     {
     private readonly List<User> _users;
 
@@ -18,7 +18,7 @@ public class AuthoServices : IAutho
         _users = users;
     }
 
-    UserDto  IAutho.Login(LoginDto loginDto)
+    UserDto  IAuthoService.Login(LoginDto loginDto)
     {
         var user=_users.FirstOrDefault(u=> u.UserEmail==loginDto.Email);
         if (user == null)
