@@ -2,6 +2,7 @@
 using AnimalShelter.Dto;
 using AnimalShelter.Dto.UserDtos;
 using AnimalShelter.src.Repositories.Implementations;
+using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +15,11 @@ namespace AnimalShelter.src.Services.Implementation
 {
     public class UserService : IUserService
     {
-        private readonly UserRepo _userRepo;
+        private readonly IUserRepo _userRepo;
 
-        public UserService(UserRepo userRepo)
+        public UserService(IUserRepo userRepo)
         {
-            userRepo = _userRepo;
+            _userRepo = userRepo;
         }
         public void AddUser(CreateUserDto UserDto, string CreatedBy)
         {

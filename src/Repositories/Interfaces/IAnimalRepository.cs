@@ -21,7 +21,7 @@ namespace Animal_Shelter_V2.src.Repositories.Interfaces
         void AddAdoption(Adoption adoption);
         void AddCareNote(int id, string note);
 
-        void UpdateStatus(int id, AnimalStatus newStatus);
+        void UpdateStatus(int id, EnumAnimalStatus newStatus);
 
         IReadOnlyList<Animal> GetAll();
     }

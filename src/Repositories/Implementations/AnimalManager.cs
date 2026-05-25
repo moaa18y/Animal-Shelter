@@ -66,7 +66,7 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
 
             if (animal != null)
             {
-                animal.Status = AnimalStatus.Adopted;
+                animal.Status = EnumAnimalStatus.Adopted;
                 animal.Adoption = adoption;
             }
 

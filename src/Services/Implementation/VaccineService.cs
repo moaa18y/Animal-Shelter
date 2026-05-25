@@ -1,6 +1,7 @@
 ﻿using AnimalShelter.CustomException;
 using AnimalShelter.Dto;
 using AnimalShelter.src.Repositories.Implementations;
+using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace AnimalShelter.src.Services.Implementation
 {
     public class VaccineService : IVaccineService
     {
-        private readonly VaccineRepo _vaccineRepo;
+        private readonly IVaccineRepo _vaccineRepo;
 
-        public VaccineService(VaccineRepo vaccineRepo   )
+        public VaccineService(IVaccineRepo vaccineRepo   )
         {
             _vaccineRepo = vaccineRepo;
         }

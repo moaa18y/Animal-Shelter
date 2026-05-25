@@ -17,6 +17,6 @@ public interface IAnimalService
         void AddCareNote(int id, string note);
 
         // Needed for non-adoption status changes routed through the service layer
-        void UpdateStatus(int id, AnimalStatus newStatus);
+        void UpdateStatus(int id, EnumAnimalStatus newStatus);
     }
 

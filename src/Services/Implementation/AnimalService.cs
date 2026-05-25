@@ -67,7 +67,7 @@ namespace Animal_Shelter_V2.src.Services.Implementation
             _repo.AddCareNote(id, note);
         }
 
-        public void UpdateStatus(int id, AnimalStatus newStatus)
+        public void UpdateStatus(int id, EnumAnimalStatus newStatus)
         {
             var animal = _repo.FindById(id);
             if (animal == null)
