@@ -12,13 +12,13 @@ public interface IAnimalService
         Animal GetAnimal(int id);
         List<Animal> GetAllAnimals();
         
-        List<Animal> GetByStatus(AnimalStatus status);
+        List<Animal> GetByStatus(EnumAnimalStatus status);
         List<Animal> SearchByName(string name);
 
         void AdoptAnimal(int id, string adopterName);
         void AddCareNote(int id, string note);
 
         // Needed for non-adoption status changes routed through the service layer
-        void UpdateStatus(int id, AnimalStatus newStatus);
+        void UpdateStatus(int id, EnumAnimalStatus newStatus);
     }
 

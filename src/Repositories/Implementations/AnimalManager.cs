@@ -59,7 +59,7 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
                 .ToList();
         }
 
-        public List<Animal> FindByStatus(AnimalStatus status)
+        public List<Animal> FindByStatus(EnumAnimalStatus status)
         {
             return _dbContext.Animals
                 .Include(a => a.Vaccines)
@@ -67,7 +67,7 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
                 .ToList();
         }
 
-        public void UpdateStatus(int id, AnimalStatus newStatus)
+        public void UpdateStatus(int id, EnumAnimalStatus newStatus)
         {
             var animal = _dbContext.Animals.Find(id);
             if (animal == null) throw new AnimalNotFoundException(id);
@@ -88,7 +88,7 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
 
             if (animal != null)
             {
-                animal.Status = AnimalStatus.Adopted;
+                animal.Status = EnumAnimalStatus.Adopted;
                 animal.Adoption = adoption;
             }
 
