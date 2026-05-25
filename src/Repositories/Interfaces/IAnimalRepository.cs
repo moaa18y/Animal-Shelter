@@ -18,9 +18,6 @@ namespace Animal_Shelter_V2.src.Repositories.Interfaces
 
         Animal FindById(int id);
 
-       
-        void AddCareNote(int id, string note);
-
         void UpdateStatus(int id, EnumAnimalStatus newStatus);
 
         IReadOnlyList<Animal> GetAll();

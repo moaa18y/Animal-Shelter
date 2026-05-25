@@ -2,8 +2,8 @@
 using Animal_Shelter.CustomException;
 using Animal_Shelter.src.Repositories.Implementations;
 using Animal_Shelter_V2.src.Models;
-using Animal_Shelter_V2.src.Repositories.Implementations;
 using Animal_Shelter_V2.src.Repositories.Interfaces;
+using AnimalShelter.Dto;
 
 using AnimalShelter.CustomException;
 
@@ -16,9 +16,9 @@ namespace Animal_Shelter.src.Services.Implementation
     public class Addoptionservice
     {
         private readonly IAnimalRepository _animalRepo;
-        private readonly AdoptionRepo _adoptionRepo;
+        private readonly IAdoptionRepo _adoptionRepo;
         private readonly IUserRepo _userRepo;
-        public Addoptionservice(IAnimalRepository animalRepo, AdoptionRepo adoptionRepo, IUserRepo userRepo)
+        public Addoptionservice(IAnimalRepository animalRepo, IAdoptionRepo adoptionRepo, IUserRepo userRepo)
         {
             _animalRepo = animalRepo ?? throw new RepoNotFoundException(nameof(animalRepo));
             _adoptionRepo = adoptionRepo ?? throw new RepoNotFoundException(nameof(adoptionRepo));
@@ -50,6 +50,68 @@ namespace Animal_Shelter.src.Services.Implementation
             animal.Adoption = adoption;
 
             _adoptionRepo.AddAdoption(adoption);
+        }
+
+        public void DeleteAdoption(int adoptionId)
+        {
+            var adoption = _adoptionRepo.GetById(adoptionId);
+            if (adoption == null)
+                throw new InvalidAdoptionRequestException("Adoption not found.");
+
+            var animal = adoption.Animal;
+            if (animal != null)
+            {
+                animal.Status = EnumAnimalStatus.Available;
+                animal.Adoption = null;
+            }
+
+            _adoptionRepo.RemoveAdoption(adoptionId);
+        }
+
+        public void UpdateAdoption(int adoptionId, UpdateAdoptionDto dto)
+        {
+            var adoption = _adoptionRepo.GetById(adoptionId);
+            if (adoption == null)
+                throw new InvalidAdoptionRequestException("Adoption not found.");
+
+            if (dto == null)
+                throw new ArgumentNullException(nameof(dto));
+
+            if (dto.UserId.HasValue)
+            {
+                var user = _userRepo.GetUserById(dto.UserId.Value);
+                if (user == null)
+                    throw new AdopterNotFoundException();
+
+                adoption.User = user;
+                adoption.UserId = user.UserId;
+            }
+
+            if (dto.AnimalId.HasValue)
+            {
+                var newAnimal = _animalRepo.FindById(dto.AnimalId.Value);
+                if (newAnimal == null)
+                    throw new AnimalNotFoundException();
+
+                if (newAnimal.Status == EnumAnimalStatus.Adopted)
+                    throw new AnimalAlreadyAdoptedException(newAnimal.Id, newAnimal.Name);
+
+                var oldAnimal = adoption.Animal;
+                if (oldAnimal != null)
+                {
+                    oldAnimal.Status = EnumAnimalStatus.Available;
+                    oldAnimal.Adoption = null;
+                }
+
+                newAnimal.Status = EnumAnimalStatus.Adopted;
+                adoption.Animal = newAnimal;
+                adoption.AnimalId = newAnimal.Id;
+            }
+
+            if (dto.AdoptedAt.HasValue)
+                adoption.AdoptedAt = dto.AdoptedAt.Value;
+
+            _adoptionRepo.UpdateAdoption(adoption);
         }
     }
 }

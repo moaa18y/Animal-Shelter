@@ -15,6 +15,7 @@ namespace AnimalShelter.DbForMigration
         public DbSet<Animal> Animals { get; set; }
         public DbSet<Adoption> Adoptions { get; set; }
         public DbSet<Vaccine> Vaccines { get; set; }
+        public DbSet<CareNote> CareNotes { get; set; }
 
         public DbSet<User> Users { get; set; }
 
