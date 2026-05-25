@@ -9,6 +9,7 @@ using Animal_Shelter_V2.src.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Animal_Shelter.CustomException;
 
 namespace Animal_Shelter_V2.src.Services.Implementation
 {
@@ -19,13 +20,16 @@ namespace Animal_Shelter_V2.src.Services.Implementation
 
         public AnimalService(IAnimalRepository repo, IUserRepo userRepo)
         {
-            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
-            _userRepo = userRepo ?? throw new ArgumentNullException(nameof(userRepo));
+            _repo = repo ?? throw new RepoNotFoundException(nameof(repo));
+            _userRepo = userRepo ?? throw new RepoNotFoundException(nameof(userRepo));
         }
 
-        public void AddAnimal(int type)
+        public void AddAnimal(Animal animal)
         {
-            throw new NotSupportedException("Animal creation should use a DTO-based EF flow. The old factory-based console input flow is retired.");
+            if (animal == null)
+                throw new ArgumentNullException(nameof(animal));
+            throw new AnimalNotFoundException();
+            _repo.Add(animal);
         }
 
         public bool RemoveAnimal(int id)
@@ -51,47 +55,6 @@ namespace Animal_Shelter_V2.src.Services.Implementation
             return _repo.GetAll().ToList();
         }
 
-        public List<Animal> SearchByName(string name)
-        {
-            return _repo.FindByName(name);
-        }
-
-        public List<Animal> GetByStatus(AnimalStatus status)
-        {
-            return _repo.FindByStatus(status);
-        }
-
-        public void AdoptAnimal(int id, string adopterName)
-        {
-            DtoValidator.Validate(new AdoptionRequestDto
-            {
-                AnimalId = id,
-                AdopterEmail = adopterName
-            });
-
-            var animal = _repo.FindById(id);
-            if (animal == null)
-                throw new AnimalNotFoundException(id);
-
-            if (animal.Status == AnimalStatus.Adopted)
-                throw new AnimalAlreadyAdoptedException(animal.Id, animal.Name);
-
-            var user = _userRepo.FindByEmail(adopterName);
-            if (user == null)
-                throw new AdopterNotFoundException(string.Empty, adopterName);
-
-            var adoption = new Adoption
-            {
-                AnimalId = animal.Id,
-                Animal = animal,
-                UserId = user.UserId,
-                User = user,            
-                CreatedBy = user.UserName
-            };
-
-            _repo.AddAdoption(adoption);
-        }
-
         public void AddCareNote(int id, string note)
         {
             if (string.IsNullOrWhiteSpace(note))
@@ -108,7 +71,7 @@ namespace Animal_Shelter_V2.src.Services.Implementation
         {
             var animal = _repo.FindById(id);
             if (animal == null)
-                throw new AnimalNotFoundException(id);
+                throw new AnimalNotFoundException();
 
             _repo.UpdateStatus(id, newStatus);
         }

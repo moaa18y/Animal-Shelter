@@ -27,6 +27,7 @@ namespace AnimalShelter.src.Repositories.Implementations
             
 
         }
+        
 
 
 
@@ -39,6 +40,16 @@ namespace AnimalShelter.src.Repositories.Implementations
             .ThenInclude(a => a.Animal)
                 .ThenInclude(an => an.Vaccines)
                 .AsNoTracking().ToList();
+        }
+
+        public User GetUserById(int id)
+        {
+            return _dbContext.Users
+                .Include(u => u.Role)
+                .Include(u => u.Adoptions)
+                    .ThenInclude(a => a.Animal)
+                        .ThenInclude(an => an.Vaccines)
+                .FirstOrDefault(u => u.UserId == id);
         }
 
         
