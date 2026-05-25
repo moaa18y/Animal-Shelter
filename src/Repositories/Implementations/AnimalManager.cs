@@ -32,7 +32,9 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
         public bool Remove(int id)
         {
             var animal = _dbContext.Animals.Find(id);
-            _dbContext.Animals.Remove(animal);
+            if (animal == null) return false;
+            animal.IsDeleted = true;
+            animal.DeletedAt = DateTime.Now;
             _dbContext.SaveChanges();
             return true;
         }
@@ -41,6 +43,7 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
         {
             return _dbContext.Animals
                 .Include(a => a.Vaccines)
+                .Include(a => a.CareNotes)
                 .Include(a => a.Adoption)
                 .FirstOrDefault(a => a.Id == id);
         }
@@ -52,28 +55,11 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
-        
-
-        public void AddCareNote(int id, string note)
-        {
-            var animal = _dbContext.Animals.Include(a => a.Vaccines).FirstOrDefault(a => a.Id == id);
-
-            var careRecord = new Vaccine
-            {
-                VaccineName = "CareNote",
-                VaccineDescription = note,
-                VaccineDate = DateTime.Now
-            };
-
-            animal.Vaccines ??= new List<Vaccine>();
-            animal.Vaccines.Add(careRecord);
-            _dbContext.SaveChanges();
-        }
-
         public IReadOnlyList<Animal> GetAll()
         {
             return _dbContext.Animals
                 .Include(a => a.Vaccines)
+                .Include(a => a.CareNotes)
                 .Include(a => a.Adoption)
                 .OrderBy(a => a.Id).AsNoTracking()
                 .ToList();

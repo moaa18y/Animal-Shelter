@@ -25,6 +25,7 @@ public  class Animal :BaseEntity
         public Adoption? Adoption { get; set; }
 
         public List<Vaccine>? Vaccines { get; set; }
+        public List<CareNote>? CareNotes { get; set; }
 
         // dog
         public string? Breed { get; set; } 
