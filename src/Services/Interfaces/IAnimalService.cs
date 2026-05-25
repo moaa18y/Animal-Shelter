@@ -1,4 +1,4 @@
-﻿using Animal_Shelter_V2.src.Models.implementation;
+﻿
 
 using System.Collections.Generic;
 
@@ -6,14 +6,12 @@ using System.Collections.Generic;
 
 public interface IAnimalService
     {
-        void AddAnimal(int type);
+        void AddAnimal(Animal animal);
         bool RemoveAnimal(int id);
 
         Animal GetAnimal(int id);
         List<Animal> GetAllAnimals();
         
-
-        void AdoptAnimal(int id, string adopterName);
         void AddCareNote(int id, string note);
 
         // Needed for non-adoption status changes routed through the service layer
