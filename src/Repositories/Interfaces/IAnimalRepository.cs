@@ -12,14 +12,11 @@ namespace Animal_Shelter_V2.src.Repositories.Interfaces
 {
     public interface IAnimalRepository
     {
-        int Count { get; }
 
         void Add(Animal animal);
         bool Remove(int id);
 
         Animal FindById(int id);
-        List<Animal> FindByName(string name);
-        List<Animal> FindByStatus(EnumAnimalStatus status);
 
         void AddAdoption(Adoption adoption);
         void AddCareNote(int id, string note);

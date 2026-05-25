@@ -12,8 +12,6 @@ public interface IAnimalService
         Animal GetAnimal(int id);
         List<Animal> GetAllAnimals();
         
-        List<Animal> GetByStatus(EnumAnimalStatus status);
-        List<Animal> SearchByName(string name);
 
         void AdoptAnimal(int id, string adopterName);
         void AddCareNote(int id, string note);

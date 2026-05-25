@@ -20,11 +20,9 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public int Count => _dbContext.Animals.Count();
 
         public void Add(Animal animal)
         {
-            if (animal == null) throw new ArgumentNullException(nameof(animal));
             if (_dbContext.Animals.Any(a => a.Id == animal.Id))
                 throw new InvalidOperationException($"An animal with ID {animal.Id} already exists.");
 
@@ -48,29 +46,9 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
                 .FirstOrDefault(a => a.Id == id);
         }
 
-        public List<Animal> FindByName(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Cannot be empty.", nameof(name));
-
-            return _dbContext.Animals
-                .Include(a => a.Vaccines)
-                .Where(a => EF.Functions.Like(a.Name, $"%{name}%"))
-                .ToList();
-        }
-
-        public List<Animal> FindByStatus(EnumAnimalStatus status)
-        {
-            return _dbContext.Animals
-                .Include(a => a.Vaccines)
-                .Where(a => a.Status == status)
-                .ToList();
-        }
-
-        public void UpdateStatus(int id, EnumAnimalStatus newStatus)
+        public void UpdateStatus(int id, AnimalStatus newStatus)
         {
             var animal = _dbContext.Animals.Find(id);
-            if (animal == null) throw new AnimalNotFoundException(id);
             animal.Status = newStatus;
             _dbContext.SaveChanges();
         }
@@ -118,7 +96,7 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
                 .Include(a => a.Adoption)
                 .OrderBy(a => a.Id)
                 .ToList()
-                .AsReadOnly();
+                .Asnotracking();
         }
     }
 }
