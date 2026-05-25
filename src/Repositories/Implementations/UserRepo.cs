@@ -76,6 +76,30 @@ namespace AnimalShelter.src.Repositories.Implementations
 
         }
 
+        public void DeleteUser(User user, string DeletedBy)
+        {
+            user.IsDeleted = true;
+            user.DeletedAt = DateTime.Now;
+            user.DeletedBy = DeletedBy;
+        }
+
+
+        public void UpdateUser(User user, UpdateUserDto UpdateUser, string updatedBy) { 
+            if (!string.IsNullOrEmpty(UpdateUser.Username))
+                user.UserName = UpdateUser.Username;
+
+            if (!string.IsNullOrEmpty(UpdateUser.Email))
+                user.UserEmail = UpdateUser.Email;
+
+            if (UpdateUser.RoleId.HasValue)
+                user.RoleId = UpdateUser.RoleId.Value;
+
+            user.UpdatedAt = DateTime.Now;
+            user.UpdatedBy = updatedBy;
+
+        }
+
+        
         public void SaveChange()
         {
             _dbContext.SaveChanges();

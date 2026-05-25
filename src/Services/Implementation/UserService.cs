@@ -50,10 +50,7 @@ namespace AnimalShelter.src.Services.Implementation
                 throw new UserNotFoundException();
             }
             
-            
-            user.IsDeleted= true;
-            user.DeletedAt= DateTime.Now;
-            user.DeletedBy= DeletedBy;
+            _userRepo.DeleteUser(user, DeletedBy);
             _userRepo.SaveChange();
 
         }
@@ -135,18 +132,7 @@ namespace AnimalShelter.src.Services.Implementation
                 throw new UserNotFoundException();
             }
 
-            if (!string.IsNullOrEmpty(UpdateUser.Username))
-                user.UserName = UpdateUser.Username;
-
-            if (!string.IsNullOrEmpty(UpdateUser.Email))
-                user.UserEmail = UpdateUser.Email;
-
-            if (UpdateUser.RoleId.HasValue)
-                user.RoleId = UpdateUser.RoleId.Value;
-
-
-            user.UpdatedAt = DateTime.Now;
-            user.UpdatedBy = updatedBy;
+            _userRepo.UpdateUser(user, UpdateUser, updatedBy);
 
             _userRepo.SaveChange();
 
