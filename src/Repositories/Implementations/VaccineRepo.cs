@@ -10,6 +10,11 @@ namespace AnimalShelter.src.Repositories.Implementations
     public class VaccineRepo : IVaccineRepo
     {
         private readonly AppDBContext _dbContext;
+
+        public VaccineRepo(AppDBContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public void AddVaccine(Vaccine vaccine)
         {
             _dbContext.Add(vaccine);

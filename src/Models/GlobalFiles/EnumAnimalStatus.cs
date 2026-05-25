@@ -1,6 +1,6 @@
 
     //Animal status enum to represent the different states an animal can be in within the shelter
-    public enum AnimalStatus
+    public enum EnumAnimalStatus
     {
         Available,
         Adopted,

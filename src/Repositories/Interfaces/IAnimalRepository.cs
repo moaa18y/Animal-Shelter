@@ -19,12 +19,12 @@ namespace Animal_Shelter_V2.src.Repositories.Interfaces
 
         Animal FindById(int id);
         List<Animal> FindByName(string name);
-        List<Animal> FindByStatus(AnimalStatus status);
+        List<Animal> FindByStatus(EnumAnimalStatus status);
 
         void AddAdoption(Adoption adoption);
         void AddCareNote(int id, string note);
 
-        void UpdateStatus(int id, AnimalStatus newStatus);
+        void UpdateStatus(int id, EnumAnimalStatus newStatus);
 
         IReadOnlyList<Animal> GetAll();
     }

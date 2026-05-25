@@ -24,7 +24,7 @@ namespace AnimalShelter.DbForMigration
                 .HasQueryFilter(u => !u.IsDeleted);
 
             modelBuilder.Entity<Animal>()
-                .HasQueryFilter(a => a.Status != AnimalStatus.Adopted);
+                .HasQueryFilter(a => a.Status != EnumAnimalStatus.Adopted);
         }
     }
 }

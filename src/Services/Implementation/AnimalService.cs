@@ -56,7 +56,7 @@ namespace Animal_Shelter_V2.src.Services.Implementation
             return _repo.FindByName(name);
         }
 
-        public List<Animal> GetByStatus(AnimalStatus status)
+        public List<Animal> GetByStatus(EnumAnimalStatus status)
         {
             return _repo.FindByStatus(status);
         }
@@ -73,7 +73,7 @@ namespace Animal_Shelter_V2.src.Services.Implementation
             if (animal == null)
                 throw new AnimalNotFoundException(id);
 
-            if (animal.Status == AnimalStatus.Adopted)
+            if (animal.Status == EnumAnimalStatus.Adopted)
                 throw new AnimalAlreadyAdoptedException(animal.Id, animal.Name);
 
             var user = _userRepo.FindByEmail(adopterName);
@@ -104,7 +104,7 @@ namespace Animal_Shelter_V2.src.Services.Implementation
             _repo.AddCareNote(id, note);
         }
 
-        public void UpdateStatus(int id, AnimalStatus newStatus)
+        public void UpdateStatus(int id, EnumAnimalStatus newStatus)
         {
             var animal = _repo.FindById(id);
             if (animal == null)
