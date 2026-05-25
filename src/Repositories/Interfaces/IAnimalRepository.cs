@@ -1,6 +1,6 @@
-﻿using Animal_Shelter_V2.src.Models.implementation;
+﻿
 using Animal_Shelter_V2.src.Models;
-using AnimalShelter.Dto.AdoptionDtos;
+
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace Animal_Shelter_V2.src.Repositories.Interfaces
 
         Animal FindById(int id);
 
-        void AddAdoption(Adoption adoption);
+       
         void AddCareNote(int id, string note);
 
         void UpdateStatus(int id, EnumAnimalStatus newStatus);

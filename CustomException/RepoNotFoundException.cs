@@ -1,3 +1,4 @@
+using System;
 namespace Animal_Shelter.CustomException
 {
     public class RepoNotFoundException: Exception

@@ -1,15 +1,16 @@
-using Animal_Shelter_V2.src.Factory.Implementations;
+
 using Animal_Shelter_V2.src.Repositories.Implementations;
-using Animal_Shelter_V2.src.Models.implementation;
+
 using Animal_Shelter_V2.src.Repositories.Interfaces;
-using AnimalShelter.Dto.AdoptionDtos;
+
 using AnimalShelter.CustomException;
-using Animal_Shelter_V2.src.Validators;
+
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Animal_Shelter.CustomException;
+using AnimalShelter.src.Repositories.Interfaces;
 
 namespace Animal_Shelter_V2.src.Services.Implementation
 {
@@ -37,7 +38,7 @@ namespace Animal_Shelter_V2.src.Services.Implementation
             var animal = _repo.FindById(id);
 
             if (animal == null)
-                throw new AnimalNotFoundException(id);
+                throw new AnimalNotFoundException();
 
             return _repo.Remove(id);
         }
@@ -46,7 +47,7 @@ namespace Animal_Shelter_V2.src.Services.Implementation
         {
             var animal = _repo.FindById(id);
             if (animal == null)
-                throw new AnimalNotFoundException(id);
+                throw new AnimalNotFoundException();
             return animal;
         }
 
@@ -62,12 +63,12 @@ namespace Animal_Shelter_V2.src.Services.Implementation
 
             var animal = _repo.FindById(id);
             if (animal == null)
-                throw new AnimalNotFoundException(id);
+                throw new AnimalNotFoundException();
 
             _repo.AddCareNote(id, note);
         }
 
-        public void UpdateStatus(int id, AnimalStatus newStatus)
+        public void UpdateStatus(int id, EnumAnimalStatus newStatus)
         {
             var animal = _repo.FindById(id);
             if (animal == null)

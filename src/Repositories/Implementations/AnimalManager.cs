@@ -5,7 +5,7 @@ using System.Linq;
 using AnimalShelter.DbForMigration;
 using Microsoft.EntityFrameworkCore;
 using Animal_Shelter_V2.src.Models;
-using Animal_Shelter_V2.src.Models.implementation;
+
 using AnimalShelter.CustomException;
 
 namespace Animal_Shelter_V2.src.Repositories.Implementations
@@ -45,32 +45,14 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
                 .FirstOrDefault(a => a.Id == id);
         }
 
-        public void UpdateStatus(int id, AnimalStatus newStatus)
+        public void UpdateStatus(int id, EnumAnimalStatus newStatus)
         {
             var animal = _dbContext.Animals.Find(id);
             animal.Status = newStatus;
             _dbContext.SaveChanges();
         }
 
-        public void AddAdoption(Adoption adoption)
-        {
-            if (adoption == null)
-                throw new ArgumentNullException(nameof(adoption));
-
-            _dbContext.Adoptions.Add(adoption);
-
-            var animal = adoption.Animal;
-            if (animal == null)
-                animal = _dbContext.Animals.Find(adoption.AnimalId);
-
-            if (animal != null)
-            {
-                animal.Status = AnimalStatus.Adopted;
-                animal.Adoption = adoption;
-            }
-
-            _dbContext.SaveChanges();
-        }
+        
 
         public void AddCareNote(int id, string note)
         {
@@ -93,9 +75,8 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
             return _dbContext.Animals
                 .Include(a => a.Vaccines)
                 .Include(a => a.Adoption)
-                .OrderBy(a => a.Id)
-                .ToList()
-                .Asnotracking();
+                .OrderBy(a => a.Id).AsNoTracking()
+                .ToList();
         }
     }
 }
