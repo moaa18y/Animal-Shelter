@@ -1,4 +1,4 @@
-﻿using Animal_Shelter_V2.src.Factory.Implementations;
+using Animal_Shelter_V2.src.Factory.Implementations;
 using Animal_Shelter_V2.src.Repositories.Implementations;
 using Animal_Shelter_V2.src.Models.implementation;
 using Animal_Shelter_V2.src.Repositories.Interfaces;
@@ -67,7 +67,7 @@ namespace Animal_Shelter_V2.src.Services.Implementation
             _repo.AddCareNote(id, note);
         }
 
-        public void UpdateStatus(int id, EnumAnimalStatus newStatus)
+        public void UpdateStatus(int id, AnimalStatus newStatus)
         {
             var animal = _repo.FindById(id);
             if (animal == null)
