@@ -64,21 +64,7 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
 
         
 
-        public void AddCareNote(int id, string note)
-        {
-            var animal = _dbContext.Animals.Include(a => a.Vaccines).FirstOrDefault(a => a.Id == id);
-
-            var careRecord = new Vaccine
-            {
-                VaccineName = "CareNote",
-                VaccineDescription = note,
-                VaccineDate = DateTime.Now
-            };
-
-            animal.Vaccines ??= new List<Vaccine>();
-            animal.Vaccines.Add(careRecord);
-            _dbContext.SaveChanges();
-        }
+       
 
         public IReadOnlyList<Animal> GetAll()
         {
