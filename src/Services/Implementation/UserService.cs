@@ -69,18 +69,34 @@ namespace AnimalShelter.src.Services.Implementation
                 {
                     id = a.AdoptionId,
                     AdoptedAt=a.AdoptedAt,
-                    Animal=new AnimalDto
+                    Animal=new GetAnimalDto
                     {
-                        id=a.AnimalId,
-                        name=a.Animal.Name,
-                        age=a.Animal.Age,
+                        Id=a.AnimalId,
+                        Name=a.Animal.Name,
+                        Age=a.Animal.Age,
+                        Species=a.Animal.Species,
+                        Status=a.Animal.Status,
+                        Breed=a.Animal.Breed,
+                        Size=a.Animal.Size,
+                        Color=a.Animal.Color,
+                        IsIndoor=a.Animal.IsIndoor,
+                        CanFly=a.Animal.CanFly,
+                        AnimalType=a.Animal.AnimalType,
+                        IsNocturnal =a.Animal.IsNocturnal,
                         Vaccines=a.Animal.Vaccines.Select(v=>new GetVaccineDto
                         {
                             Id=v.VaccineId,
                             VaccineName=v.VaccineName,
                             VaccineDate=v.VaccineDate
 
+                        }).ToList(),
+                        careNotes=a.Animal.CareNotes.Select(c=>new GetCareNoteDto
+                        {  id=c.Id,
+                           Title=c.Title,
+                           Description=c.Description
+
                         }).ToList()
+                        
                     }
                 }).ToList()
                
@@ -106,16 +122,32 @@ namespace AnimalShelter.src.Services.Implementation
                 {
                     id = a.AdoptionId,
                     AdoptedAt = a.AdoptedAt,
-                    Animal = new AnimalDto
+                    Animal = new GetAnimalDto
                     {
-                        id = a.AnimalId,
-                        name = a.Animal.Name,
-                        age = a.Animal.Age,
+                        Id = a.AnimalId,
+                        Name = a.Animal.Name,
+                        Age = a.Animal.Age,
+                        Species = a.Animal.Species,
+                        Status = a.Animal.Status,
+                        Breed = a.Animal.Breed,
+                        Size = a.Animal.Size,
+                        Color = a.Animal.Color,
+                        IsIndoor = a.Animal.IsIndoor,
+                        CanFly = a.Animal.CanFly,
+                        AnimalType = a.Animal.AnimalType,
+                        IsNocturnal = a.Animal.IsNocturnal,
                         Vaccines = a.Animal.Vaccines.Select(v => new GetVaccineDto
                         {
                             Id = v.VaccineId,
                             VaccineName = v.VaccineName,
                             VaccineDate = v.VaccineDate
+
+                        }).ToList(),
+                        careNotes = a.Animal.CareNotes.Select(c => new GetCareNoteDto
+                        {
+                            id = c.Id,
+                            Title = c.Title,
+                            Description = c.Description
 
                         }).ToList()
                     }

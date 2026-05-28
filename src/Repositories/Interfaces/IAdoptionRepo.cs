@@ -7,6 +7,6 @@ namespace AnimalShelter.src.Repositories.Interfaces
 {
     public interface IAdoptionRepo
     {
-        public void AddAdoption(Adoption adoption);
+         void AddAdoption(Adoption adoption);
     }
 }

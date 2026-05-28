@@ -1,16 +1,17 @@
 ﻿
 
+using AnimalShelter.Dto;
 using System.Collections.Generic;
 
 
 
 public interface IAnimalService
     {
-        void AddAnimal(Animal animal);
+        void AddAnimal(AddAnimalDto animalDto);
         bool RemoveAnimal(int id);
 
-        Animal GetAnimal(int id);
-        List<Animal> GetAllAnimals();
+    GetAnimalDto GetAnimal(int id);
+        List<GetAnimalDto> GetAllAnimals();
         
         void AddCareNote(int id, string note);
 

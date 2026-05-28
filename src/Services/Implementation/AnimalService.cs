@@ -1,16 +1,17 @@
 
+using Animal_Shelter.CustomException;
 using Animal_Shelter_V2.src.Repositories.Implementations;
-
 using Animal_Shelter_V2.src.Repositories.Interfaces;
-
 using AnimalShelter.CustomException;
-
-
+using AnimalShelter.Dto;
+using AnimalShelter.Dto.UserDtos;
+using AnimalShelter.src.Repositories.Interfaces;
+using Azure;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using Animal_Shelter.CustomException;
-using AnimalShelter.src.Repositories.Interfaces;
+using System.Net.NetworkInformation;
 
 namespace Animal_Shelter_V2.src.Services.Implementation
 {
@@ -25,11 +26,23 @@ namespace Animal_Shelter_V2.src.Services.Implementation
             _userRepo = userRepo ?? throw new RepoNotFoundException(nameof(userRepo));
         }
 
-        public void AddAnimal(Animal animal)
+        public void AddAnimal(AddAnimalDto animalDto)
         {
-            if (animal == null)
-                throw new ArgumentNullException(nameof(animal));
-            throw new AnimalNotFoundException();
+          
+            var animal = new Animal
+            {
+                Name = animalDto.Name,
+                Age = animalDto.Age,
+                Species = animalDto.Species,
+                Breed = animalDto.Breed,
+                Size = animalDto.Size,
+                Color = animalDto.Color,
+                IsIndoor = animalDto.IsIndoor,
+                CanFly = animalDto.CanFly,
+                AnimalType = animalDto.AnimalType,
+                IsNocturnal = animalDto.IsNocturnal
+            };
+
             _repo.Add(animal);
         }
 
@@ -43,17 +56,74 @@ namespace Animal_Shelter_V2.src.Services.Implementation
             return _repo.Remove(id);
         }
 
-        public Animal GetAnimal(int id)
+        public GetAnimalDto GetAnimal(int id)
         {
-            var animal = _repo.FindById(id);
-            if (animal == null)
+            var animalM = _repo.FindByIdReadOnly(id);
+
+            if (animalM == null)
                 throw new AnimalNotFoundException();
-            return animal;
+            
+            return new GetAnimalDto
+            {
+                Id = animalM.Id,
+                Name = animalM.Name,
+                Age = animalM.Age,
+                Species = animalM.Species,
+                Status = animalM.Status,
+                Breed = animalM.Breed,
+                Size = animalM.Size,
+                Color = animalM.Color,
+                IsIndoor = animalM.IsIndoor,
+                CanFly = animalM.CanFly,
+                AnimalType = animalM.AnimalType,
+                IsNocturnal = animalM.IsNocturnal,
+                Vaccines = animalM.Vaccines.Select(v => new GetVaccineDto
+                {
+                    Id = v.VaccineId,
+                    VaccineName = v.VaccineName,
+                    VaccineDate = v.VaccineDate
+                }).ToList(),
+                careNotes = animalM.CareNotes.Select(c => new GetCareNoteDto
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Description = c.Description
+
+                }).ToList()
+            }; 
         }
 
-        public List<Animal> GetAllAnimals()
+        public List<GetAnimalDto> GetAllAnimals()
         {
-            return _repo.GetAll().ToList();
+            var animalM = _repo.GetAll();
+            return animalM.Select(a => new GetAnimalDto
+            {
+                Id = a.Id,
+                Name = a.Name,
+                Age = a.Age,
+                Species = a.Species,
+                Status = a.Status,
+                Breed = a.Breed,
+                Size = a.Size,
+                Color = a.Color,
+                IsIndoor = a.IsIndoor,
+                CanFly = a.CanFly,
+                AnimalType = a.AnimalType,
+                IsNocturnal = a.IsNocturnal,
+                Vaccines = a.Vaccines.Select(v => new GetVaccineDto
+                {
+                    Id = v.VaccineId,
+                    VaccineName = v.VaccineName,
+                    VaccineDate = v.VaccineDate
+                }).ToList(),
+                careNotes = a.CareNotes.Select(c => new GetCareNoteDto
+                {
+                    id = c.Id,
+                    Title = c.Title,
+                    Description = c.Description
+
+                }).ToList()
+            }).ToList();
         }
 
         public void AddCareNote(int id, string note)

@@ -7,9 +7,9 @@ namespace AnimalShelter.src.Services.Interfaces
 {
     public interface IAuthorizationService
     {
-        protected bool CanManage(UserDto userDto);//Only for Admin
+         bool CanManage(UserDto userDto);//Only for Admin
 
-        protected bool CanDo(UserDto userDto);//For User and Employee 
-        protected bool CanControll(UserDto userDto); //For Employee
+         bool CanDo(UserDto userDto);//For User and Employee 
+         bool CanControll(UserDto userDto); //For Employee
     }
 }
