@@ -85,7 +85,7 @@ namespace Animal_Shelter_V2.src.Services.Implementation
                 }).ToList(),
                 careNotes = animalM.CareNotes.Select(c => new GetCareNoteDto
                 {
-                    Id = c.Id,
+                    id = c.Id,
                     Title = c.Title,
                     Description = c.Description
 
@@ -126,17 +126,7 @@ namespace Animal_Shelter_V2.src.Services.Implementation
             }).ToList();
         }
 
-        public void AddCareNote(int id, string note)
-        {
-            if (string.IsNullOrWhiteSpace(note))
-                throw new InvalidCareNoteException("Note cannot be empty.");
-
-            var animal = _repo.FindById(id);
-            if (animal == null)
-                throw new AnimalNotFoundException();
-
-            _repo.AddCareNote(id, note);
-        }
+        
 
         public void UpdateStatus(int id, EnumAnimalStatus newStatus)
         {
