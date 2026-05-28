@@ -88,6 +88,7 @@ namespace AnimalShelter.src.Services.Implementation
 
         }
 
+
         public UserDto GetUserByEmail(string email)
         {
 
