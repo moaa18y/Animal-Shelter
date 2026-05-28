@@ -6,6 +6,6 @@ using System.Text;
 
 public interface IAuthoService
 {
-    protected UserDto Login(LoginDto loginDto);
+     UserDto Login(LoginDto loginDto);
 }
 

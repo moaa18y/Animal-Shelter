@@ -1,6 +1,7 @@
 ﻿using Animal_Shelter_V2.src.Models;
 using AnimalShelter.CustomException;
-
+using AnimalShelter.DbForMigration;
+using AnimalShelter.src.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,17 +11,17 @@ using System.Threading.Tasks;
 
 public class AuthoServices : IAuthoService
     {
-    private readonly List<User> _users;
+    private readonly IUserRepo _usersrepo;
 
    
-    public AuthoServices(List<User> users)
+    public AuthoServices(IUserRepo usersrepo)
     {
-        _users = users;
+        _usersrepo = usersrepo ;
     }
 
-    UserDto  IAuthoService.Login(LoginDto loginDto)
+    public UserDto  Login(LoginDto loginDto)
     {
-        var user=_users.FirstOrDefault(u=> u.UserEmail==loginDto.Email);
+        var user=_usersrepo.GetUserByEmail(loginDto.Email);
         if (user == null)
         {
             throw new UserNotFoundException();

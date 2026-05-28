@@ -17,8 +17,9 @@ namespace Animal_Shelter_V2.src.Models
         public User User { get; set; }
 
         public int AnimalId { get; set; }
+
         [ForeignKey("AnimalId")]
-        public Animal Animal { get; set; }
+        public Animal? Animal { get; set; }
 
 
         public DateTime AdoptedAt { get; set; }= DateTime.Now; 

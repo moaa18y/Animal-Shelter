@@ -23,7 +23,7 @@ public class Vaccine : BaseEntity
         public int AnimalId { get; set; }
 
         [ForeignKey(nameof(AnimalId))]
-        public Animal Animal { get; set; }
+        public Animal? Animal { get; set; }
        
    }
 
