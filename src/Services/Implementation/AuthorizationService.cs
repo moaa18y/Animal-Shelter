@@ -7,7 +7,7 @@ using System.Text;
 
 namespace AnimalShelter.src.Services.Implementation
 {
-    public class Authorization : IAuthorization
+    public class AuthorizationService : IAuthorizationService
     {
 
         public bool CanDo(UserDto userDto)

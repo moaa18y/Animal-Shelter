@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-public interface IAutho
+public interface IAuthoService
 {
     protected UserDto Login(LoginDto loginDto);
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AnimalShelter.src.Services.Interfaces
 {
-    public interface IAuthorization
+    public interface IAuthorizationService
     {
         protected bool CanManage(UserDto userDto);//Only for Admin
 

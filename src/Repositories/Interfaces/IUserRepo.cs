@@ -18,8 +18,11 @@ namespace AnimalShelter.src.Repositories.Interfaces
 
         User GetUserByEmailReadOnly(string email);
 
-        
-         void SaveChange();
+        public void DeleteUser(User user, string DeletedBy);
+
+
+        public void UpdateUser(User user, UpdateUserDto UpdateUser, string updatedBy);
+        void SaveChange();
 
     }
 }
