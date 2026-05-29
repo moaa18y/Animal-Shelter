@@ -22,9 +22,7 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
 
         public void Add(Animal animal)
         {
-            if (_dbContext.Animals.Any(a => a.Id == animal.Id))
-                throw new InvalidOperationException($"An animal with ID {animal.Id} already exists.");
-
+            
             _dbContext.Animals.Add(animal);
             _dbContext.SaveChanges();
         }
@@ -32,7 +30,10 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
         public bool Remove(int id)
         {
             var animal = _dbContext.Animals.Find(id);
-            if (animal == null) return false;
+            if (animal == null)
+                return false;
+
+            
             animal.IsDeleted = true;
             animal.DeletedAt = DateTime.Now;
             _dbContext.SaveChanges();
@@ -43,11 +44,17 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
         {
             return _dbContext.Animals
                 .Include(a => a.Vaccines)
-                .Include(a => a.CareNotes)
-                .Include(a => a.Adoption)
+                .Include(a=>a.CareNotes)
                 .FirstOrDefault(a => a.Id == id);
         }
-
+        public Animal FindByIdReadOnly(int id)
+        {
+            return _dbContext.Animals
+                .Include(a => a.Vaccines)
+                .Include(a=>a.CareNotes)
+                .AsNoTracking()
+                .FirstOrDefault(a => a.Id == id);
+        }
         public void UpdateStatus(int id, EnumAnimalStatus newStatus)
         {
             var animal = _dbContext.Animals.Find(id);
@@ -55,12 +62,15 @@ namespace Animal_Shelter_V2.src.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        
+
+       
+
         public IReadOnlyList<Animal> GetAll()
         {
             return _dbContext.Animals
                 .Include(a => a.Vaccines)
-                .Include(a => a.CareNotes)
-                .Include(a => a.Adoption)
+                .Include(a=>a.CareNotes)
                 .OrderBy(a => a.Id).AsNoTracking()
                 .ToList();
         }

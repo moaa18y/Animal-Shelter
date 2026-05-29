@@ -1,49 +1,65 @@
-using Animal_Shelter_V2.src.Models;
-using Animal_Shelter_V2.src.Repositories.Interfaces;
+﻿using Animal_Shelter_V2.src.Repositories.Interfaces;
 using AnimalShelter.CustomException;
+using AnimalShelter.Dto;
+using AnimalShelter.src.Models;
+using AnimalShelter.src.Repositories.Implementations;
 using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Services.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Animal_Shelter.src.Services.Implementation
+namespace AnimalShelter.src.Services.Implementation
 {
     public class CareNoteService : ICareNoteService
     {
-        private readonly IAnimalRepository _animalRepo;
-        private readonly ICareNoteRepo _careNoteRepo;
+        private readonly ICareNoteRepo _repo;
+        private readonly IAnimalService _animalService;
 
-        public CareNoteService(IAnimalRepository animalRepo, ICareNoteRepo careNoteRepo)
+        public CareNoteService(ICareNoteRepo careNoteService, IAnimalService animalService)
         {
-            _animalRepo = animalRepo ?? throw new RepoNotFoundException(nameof(animalRepo));
-            _careNoteRepo = careNoteRepo ?? throw new RepoNotFoundException(nameof(careNoteRepo));
+            _repo = careNoteService;
+            _animalService = animalService;
         }
-
-        public void AddCareNote(int animalId, string note)
+        public void AddNote(AddCareNoteDto note, string CurrentUser)
         {
-            if (string.IsNullOrWhiteSpace(note))
-                throw new InvalidCareNoteException("Note cannot be empty.");
-
-            var animal = _animalRepo.FindById(animalId);
-            if (animal == null)
-                throw new AnimalNotFoundException();
-
-            var careNote = new CareNote
-            {
-                AnimalId = animal.Id,
-                Animal = animal,
-                Note = note
+            var animal = _animalService.GetAnimal(note.AnimalId);
+            var noteM = new CareNote
+            { 
+                AnimalId = note.AnimalId,
+                Title = note.Title,
+                Description = note.Description,
+                           
             };
 
-            _careNoteRepo.AddCareNote(careNote);
+            _repo.AddNote(noteM, CurrentUser); 
         }
 
-        public void DeleteCareNote(int careNoteId)
+        public void DeleteNote(int id)
         {
-            var careNote = _careNoteRepo.GetById(careNoteId);
-            if (careNote == null)
-                throw new InvalidCareNoteException("Care note not found.");
+            var note=_repo.GetNote(id);
+            if (note is null)
+            {
+                throw new NoteNotFoundException();
+            }
+            _repo.DeleteNote(note);
 
-            _careNoteRepo.RemoveCareNote(careNoteId);
+        }
+
+       
+
+        public void UpdateNote(int id, UpdateCareNoteDto NoteDto, string CurrentUser)
+        {
+             var note = _repo.GetNote(id);
+
+            var NewNote = new CareNote
+            {
+                AnimalId = NoteDto.AnimalId,
+                Title = NoteDto.Title,
+                Description = NoteDto.Description,
+            };
+            _repo.UpdateNote(NewNote, note, CurrentUser);
+
         }
     }
 }

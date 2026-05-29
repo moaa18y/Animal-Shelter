@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace AnimalShelter.src.Models
+namespace AnimalShelter.Dto
 {
-    public class CareNote :BaseEntity
+    public class AddCareNoteDto
     {
-        [Key]
-        public int Id { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -17,8 +14,7 @@ namespace AnimalShelter.src.Models
         [Required]
         public string Description { get; set; }
 
+        [Required]
         public int AnimalId { get; set; }
-        [ForeignKey(nameof(AnimalId))]
-        public Animal Animal { get; set; }
     }
 }

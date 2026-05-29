@@ -1,4 +1,5 @@
 using Animal_Shelter_V2.src.Models;
+using AnimalShelter.src.Models;
 using AnimalShelter.src.Models.GlobalFiles;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ public  class Animal :BaseEntity
         public Adoption? Adoption { get; set; }
 
         public List<Vaccine>? Vaccines { get; set; }
+        public List<CareNote>? CareNotes { get; set; }
+
         public List<CareNote>? CareNotes { get; set; }
 
         // dog

@@ -1,11 +1,18 @@
-using Animal_Shelter_V2.src.Models;
+﻿using AnimalShelter.src.Models;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace AnimalShelter.src.Repositories.Interfaces
 {
     public interface ICareNoteRepo
     {
-        void AddCareNote(CareNote careNote);
-        CareNote GetById(int id);
-        void RemoveCareNote(int id);
+        void AddNote(CareNote note, String CurrentUser);
+
+        CareNote GetNote(int id);
+
+        void DeleteNote(CareNote note);
+
+        void UpdateNote(CareNote Newnote,CareNote note, String CurrentUser);
     }
 }

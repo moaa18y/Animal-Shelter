@@ -1,37 +1,54 @@
-using Animal_Shelter_V2.src.Models;
+﻿using AnimalShelter.CustomException;
 using AnimalShelter.DbForMigration;
+using AnimalShelter.src.Models;
 using AnimalShelter.src.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-namespace Animal_Shelter.src.Repositories.Implementations
+namespace AnimalShelter.src.Repositories.Implementations
 {
     public class CareNoteRepo : ICareNoteRepo
     {
-        private readonly AppDBContext _dbContext;
+        private readonly AppDBContext _appDbContext;
 
-        public CareNoteRepo(AppDBContext dbContext)
+        public CareNoteRepo(AppDBContext appDBContext)
         {
-            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            _appDbContext = appDBContext;
+        }
+        public void AddNote(CareNote note, String CurrentUser)
+        {
+            note.CreatedBy = CurrentUser;
+            _appDbContext.Add(note);
+            _appDbContext.SaveChanges();
+
         }
 
-        public void AddCareNote(CareNote careNote)
+        public void DeleteNote(CareNote note)
         {
-            _dbContext.CareNotes.Add(careNote);
-            _dbContext.SaveChanges();
+            
+            _appDbContext.Remove(note);
+             _appDbContext.SaveChanges();
         }
 
-        public CareNote GetById(int id)
+        public CareNote GetNote(int id)
         {
-            return _dbContext.CareNotes.Find(id);
+            return _appDbContext.CareNotes
+                .FirstOrDefault(x => x.Id == id);
         }
+        
 
-        public void RemoveCareNote(int id)
+       public void UpdateNote(CareNote Newnote, CareNote note, String CurrentUser)
         {
-            var careNote = _dbContext.CareNotes.Find(id);
-            if (careNote == null) return;
-            careNote.IsDeleted = true;
-            careNote.DeletedAt = DateTime.Now;
-            _dbContext.SaveChanges();
+
+            note.Title = Newnote.Title;
+            note.Description = Newnote.Description;
+            note.AnimalId = Newnote.AnimalId;
+            note.UpdatedAt=DateTime.Now;
+            note.UpdatedBy = CurrentUser;
+            _appDbContext.SaveChanges();
         }
     }
 }
