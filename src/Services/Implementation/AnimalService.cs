@@ -1,7 +1,7 @@
 
-using Animal_Shelter.CustomException;
-using Animal_Shelter_V2.src.Repositories.Implementations;
-using Animal_Shelter_V2.src.Repositories.Interfaces;
+using AnimalShelter.CustomException;
+using AnimalShelter.src.Repositories.Implementations;
+using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.CustomException;
 using AnimalShelter.Dto;
 using AnimalShelter.Dto.UserDtos;
@@ -13,7 +13,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.NetworkInformation;
 
-namespace Animal_Shelter_V2.src.Services.Implementation
+namespace AnimalShelter.src.Services.Implementation
 {
     public class AnimalService : IAnimalService
     {

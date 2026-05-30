@@ -1,9 +1,12 @@
-using Animal_Shelter_V2.src.Models;
+using AnimalShelter.src.Models;
+using AnimalShelter.CustomException;
 using AnimalShelter.DbForMigration;
 using AnimalShelter.src.Repositories.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Animal_Shelter.src.Repositories.Implementations
+namespace AnimalShelter.src.Repositories.Implementations
 {
     public class AdoptionRepo : IAdoptionRepo
     {
@@ -18,6 +21,12 @@ namespace Animal_Shelter.src.Repositories.Implementations
             _dbContext.Adoptions.Add(adoption);
             _dbContext.SaveChanges();
         }
+
+        public List<Adoption> GetAllAdoptions()
+        {
+            return _dbContext.Adoptions.ToList();
+        }
+
         public Adoption GetById(int id)
         {
             return _dbContext.Adoptions.Find(id);

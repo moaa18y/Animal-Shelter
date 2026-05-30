@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Animal_Shelter_V2.src.Models
+namespace AnimalShelter.src.Models
 {
     public class Role : BaseEntity
     {

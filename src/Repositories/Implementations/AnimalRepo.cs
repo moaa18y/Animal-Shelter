@@ -1,14 +1,14 @@
-using Animal_Shelter_V2.src.Repositories.Interfaces;
+using AnimalShelter.src.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using AnimalShelter.DbForMigration;
 using Microsoft.EntityFrameworkCore;
-using Animal_Shelter_V2.src.Models;
+using AnimalShelter.src.Models;
 
 using AnimalShelter.CustomException;
 
-namespace Animal_Shelter_V2.src.Repositories.Implementations
+namespace AnimalShelter.src.Repositories.Implementations
 {
     public class AnimalManager : IAnimalRepository
     {

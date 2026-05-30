@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Animal_Shelter_V2.src.Controllers.Interfaces
+namespace AnimalShelter.src.Controllers.Interfaces
 {
     internal interface IAppController
     {

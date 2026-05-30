@@ -1,5 +1,5 @@
 ﻿
-using Animal_Shelter_V2.src.Models;
+using AnimalShelter.src.Models;
 
 
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Animal_Shelter_V2.src.Repositories.Interfaces
+namespace AnimalShelter.src.Repositories.Interfaces
 {
     public interface IAnimalRepository
     {

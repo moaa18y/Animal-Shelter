@@ -1,5 +1,5 @@
 using System;
-namespace Animal_Shelter.CustomException
+namespace AnimalShelter.CustomException
 {
     public class RepoNotFoundException: Exception
     {

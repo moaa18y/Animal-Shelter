@@ -1,4 +1,4 @@
-using Animal_Shelter_V2.src.Models;
+using AnimalShelter.src.Models;
 using AnimalShelter.src.Models;
 using AnimalShelter.src.Models.GlobalFiles;
 using System;
@@ -28,7 +28,6 @@ public  class Animal :BaseEntity
         public List<Vaccine>? Vaccines { get; set; }
         public List<CareNote>? CareNotes { get; set; }
 
-        public List<CareNote>? CareNotes { get; set; }
 
         // dog
         public string? Breed { get; set; } 

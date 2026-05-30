@@ -1,4 +1,4 @@
-﻿using Animal_Shelter_V2.src.Repositories.Interfaces;
+﻿using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.CustomException;
 using AnimalShelter.Dto;
 using AnimalShelter.src.Models;

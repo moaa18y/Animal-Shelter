@@ -1,5 +1,5 @@
 ﻿using System;
-namespace animal_Shelter.UI
+namespace AnimalShelter.UI
 {
     public class ConsoleInput
     {

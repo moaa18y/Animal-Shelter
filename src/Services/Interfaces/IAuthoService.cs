@@ -1,11 +1,14 @@
-﻿using Animal_Shelter_V2.src.Models;
-
+﻿using AnimalShelter.src.Models;
+using AnimalShelter.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-public interface IAuthoService
+namespace AnimalShelter.src.Services.Interfaces
 {
-     UserDto Login(LoginDto loginDto);
+     public interface IAuthoService
+     {
+          UserDto Login(LoginDto loginDto);
+     }
 }
 

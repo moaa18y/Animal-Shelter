@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Animal_Shelter_V2.src.Models
+namespace AnimalShelter.src.Models
 {
     public class Adoption: BaseEntity
     {
