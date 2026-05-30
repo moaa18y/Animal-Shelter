@@ -18,7 +18,8 @@ namespace AnimalShelter.src.Models
         public string Description { get; set; }
 
         public int AnimalId { get; set; }
+
         [ForeignKey(nameof(AnimalId))]
-        public Animal Animal { get; set; }
+        public Animal? Animal { get; set; }
     }
 }

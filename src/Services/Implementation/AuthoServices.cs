@@ -4,12 +4,8 @@ using AnimalShelter.DbForMigration;
 using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.Dto;
 using AnimalShelter.src.Services.Interfaces;
-using Microsoft.AspNetCore.Identity;
+using BCrypt.Net;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AnimalShelter.src.Services.Implementation
 {
@@ -24,15 +20,16 @@ namespace AnimalShelter.src.Services.Implementation
 
         public UserDto Login(LoginDto loginDto)
         {
-            var user = _usersrepo.GetUserByEmail(loginDto.Email);
+            var user = _usersrepo.GetAllUserInfoByEmail(loginDto.Email);
             if (user == null)
             {
                 throw new UserNotFoundException();
             }
-            var hash = new PasswordHasher<User>();
 
-            var result = hash.VerifyHashedPassword(user, user.UserPassword, loginDto.Password);
-            if (result == PasswordVerificationResult.Failed)
+            
+            bool isValid = BCrypt.Net.BCrypt.Verify(loginDto.Password, user.UserPassword);
+
+            if (!isValid)
             {
                 throw new InvalidPasswordException();
             }
@@ -47,4 +44,3 @@ namespace AnimalShelter.src.Services.Implementation
         }
     }
 }
-

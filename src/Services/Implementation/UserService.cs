@@ -4,6 +4,7 @@ using AnimalShelter.Dto.UserDtos;
 using AnimalShelter.src.Repositories.Implementations;
 using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Services.Interfaces;
+using AnimalShelter.src.Shared.Dtos;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -23,7 +24,7 @@ namespace AnimalShelter.src.Services.Implementation
         }
         public void AddUser(CreateUserDto UserDto, string CreatedBy)
         {
-            if (_userRepo.GetUserByEmail(UserDto.UserEmail) is not null)
+            if (_userRepo.GetAllUserInfoByEmail(UserDto.UserEmail) is not null)
                 throw new UserAlreadyExist();
 
             var hasher = new PasswordHasher<User>();
@@ -31,11 +32,12 @@ namespace AnimalShelter.src.Services.Implementation
             var user = new User
             {
                 UserName = UserDto.UserName,
-                UserEmail = UserDto.UserEmail
+                UserEmail = UserDto.UserEmail,
+                RoleId = 3, // Default role as "User"
+                CreatedBy = CreatedBy,
+                UserPassword = BCrypt.Net.BCrypt.HashPassword(UserDto.UserPassword)
             };
 
-            user.UserPassword = hasher.HashPassword(user, UserDto.UserPassword);
-            user.CreatedBy = CreatedBy;
             _userRepo.AddUser(user);
             _userRepo.SaveChange();
 
@@ -44,7 +46,7 @@ namespace AnimalShelter.src.Services.Implementation
 
         public void DeleteUser(string email, string DeletedBy)
         {
-            var user = _userRepo.GetUserByEmail(email);
+            var user = _userRepo.GetAllUserInfoByEmail(email);
             if(user is null)
             {
                 throw new UserNotFoundException();
@@ -54,6 +56,7 @@ namespace AnimalShelter.src.Services.Implementation
             _userRepo.SaveChange();
 
         }
+        
 
         public List<UserDto> GetAllUsers()
         {
@@ -159,7 +162,7 @@ namespace AnimalShelter.src.Services.Implementation
 
         public void UpdateUser(string email, UpdateUserDto UpdateUser, string updatedBy)
         {
-            var user = _userRepo.GetUserByEmail( email);
+            var user = _userRepo.GetAllUserInfoByEmail( email);
             if (user is null)
             {
                 throw new UserNotFoundException();

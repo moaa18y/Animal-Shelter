@@ -54,7 +54,7 @@ namespace AnimalShelter.src.Repositories.Implementations
 
         
 
-        public User GetUserByEmail(string email)
+        public User GetAllUserInfoByEmail(string email)
         {
             return _dbContext.Users
                 .Include(u => u.Role)
@@ -64,7 +64,16 @@ namespace AnimalShelter.src.Repositories.Implementations
                 .FirstOrDefault(u => u.UserEmail == email);
         }
 
-
+        public User GetUserInfoByEmail(string email)
+        {
+            return _dbContext.Users
+                .Include(u => u.Role)
+                .Include(u => u.Adoptions)
+                    .ThenInclude(a => a.Animal)
+                        .ThenInclude(an => an.Vaccines)
+                .FirstOrDefault(u => u.UserEmail == email);
+        }
+      
         public User GetUserByEmailReadOnly(string email)
         {
             return _dbContext.Users

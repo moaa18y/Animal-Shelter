@@ -29,7 +29,7 @@ namespace AnimalShelter.src.Repositories.Implementations
         public void DeleteNote(CareNote note)
         {
             
-            _appDbContext.Remove(note);
+            note.IsDeleted = true;
              _appDbContext.SaveChanges();
         }
 

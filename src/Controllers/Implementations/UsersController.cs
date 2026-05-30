@@ -242,10 +242,14 @@ public class UsersController
             {
                 Console.WriteLine("No users found.");
                 return;
-            }
+            }   
 
             foreach (var user in users)
+            {
+                
+                
                 Console.WriteLine($"Id: {user.Id} | {user.Username} | {user.Email} | Role: {user.Role}");
+            }
         });
     }
 
@@ -469,7 +473,7 @@ public class UsersController
 
     private static int? ParseOptionalRoleId()
     {
-        var roleInput = Helpers.ReadOptionalString("New role id (0=User,1=Admin,2=Employee) leave blank to keep: ");
+        var roleInput = Helpers.ReadOptionalString("New role id (1=Admin,2=Employee,3=User) leave blank to keep: ");
         return int.TryParse(roleInput, out var parsed) ? parsed : null;
     }
 
