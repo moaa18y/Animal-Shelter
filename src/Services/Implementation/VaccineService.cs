@@ -1,8 +1,8 @@
 ﻿using AnimalShelter.CustomException;
-using AnimalShelter.Dto;
 using AnimalShelter.src.Repositories.Implementations;
 using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Services.Interfaces;
+using AnimalShelter.src.Shared.Dto.Vaccine;
 using System;
 using System.Collections.Generic;
 using System.Linq;

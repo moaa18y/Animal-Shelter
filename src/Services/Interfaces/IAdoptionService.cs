@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using AnimalShelter.Dto;
+using AnimalShelter.src.Shared.Dto.Adoption;
 
 namespace AnimalShelter.src.Services.Interfaces
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace AnimalShelter.Dto
+namespace AnimalShelter.src.Shared.Dto.CareNoteDtos
 {
     public class GetCareNoteDto
     {

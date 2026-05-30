@@ -1,5 +1,5 @@
-﻿using AnimalShelter.Dto;
-using AnimalShelter.src.Models;
+﻿using AnimalShelter.src.Models;
+using AnimalShelter.src.Shared.Dto.CareNoteDtos;
 using System;
 using System.Collections.Generic;
 using System.Text;

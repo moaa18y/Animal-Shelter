@@ -1,6 +1,4 @@
-﻿
-
-using AnimalShelter.Dto;
+﻿using AnimalShelter.src.Shared.Dto.AnimalDtos;
 using System.Collections.Generic;
 
 

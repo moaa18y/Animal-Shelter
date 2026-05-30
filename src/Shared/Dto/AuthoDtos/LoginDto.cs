@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace AnimalShelter.Dto
+namespace AnimalShelter.src.Shared.Dto.AuthoDtos
 {
     public class LoginDto
     {

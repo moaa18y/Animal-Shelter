@@ -1,8 +1,8 @@
 ﻿using AnimalShelter.src.Models;
-using AnimalShelter.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AnimalShelter.src.Shared.Dto.AuthoDtos;
 
 namespace AnimalShelter.src.Services.Interfaces
 {

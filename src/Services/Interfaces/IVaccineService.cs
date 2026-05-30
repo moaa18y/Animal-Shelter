@@ -1,4 +1,4 @@
-﻿using AnimalShelter.Dto;
+﻿using AnimalShelter.src.Shared.Dto.Vaccine;
 using System;
 using System.Collections.Generic;
 using System.Text;

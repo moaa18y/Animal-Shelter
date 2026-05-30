@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnimalShelter.src.Shared.Dtos
+namespace AnimalShelter.src.Shared.Dto.UserDtos
 {
     public class GetUserInfo
     {

@@ -2,10 +2,10 @@
 using AnimalShelter.CustomException;
 using AnimalShelter.DbForMigration;
 using AnimalShelter.src.Repositories.Interfaces;
-using AnimalShelter.Dto;
 using AnimalShelter.src.Services.Interfaces;
 using BCrypt.Net;
 using System;
+using AnimalShelter.src.Shared.Dto.AuthoDtos;
 
 namespace AnimalShelter.src.Services.Implementation
 {

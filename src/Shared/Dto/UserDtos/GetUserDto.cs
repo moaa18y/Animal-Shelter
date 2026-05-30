@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AnimalShelter.Dto.UserDtos
+namespace AnimalShelter.src.Shared.Dto.UserDtos
 {
     public class GetUserDto
     {

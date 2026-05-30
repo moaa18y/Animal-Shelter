@@ -12,30 +12,34 @@ public class UsersController
     private readonly ICareNoteService _careNoteService;
     private readonly IVaccineService _vaccineService;
     private readonly AnimalsController _animalsController;
+    private readonly IAuthorizationService _authService;   
 
     public UsersController(
         IUserService userService,
         IAdoptionService adoptionService,
         ICareNoteService careNoteService,
         IVaccineService vaccineService,
-        AnimalsController animalsController)
+        AnimalsController animalsController,
+        IAuthorizationService authService)
     {
         _userService = userService;
         _adoptionService = adoptionService;
         _careNoteService = careNoteService;
         _vaccineService = vaccineService;
         _animalsController = animalsController;
+        _authService = authService;
     }
 
     public void ShowMenu(UserDto currentUser)
     {
-        if (currentUser.Role == EnumRole.Admin)
+        
+        if (_authService.CanManage(currentUser))
         {
             ShowAdminMenu(currentUser);
             return;
         }
 
-        if (currentUser.Role == EnumRole.Employee)
+        if (_authService.CanControll(currentUser))
         {
             ShowEmployeeMenu(currentUser);
             return;
@@ -44,90 +48,98 @@ public class UsersController
         ShowUserMenu(currentUser);
     }
 
+    
     private void ShowAdminMenu(UserDto currentUser)
     {
         while (true)
         {
-            Console.WriteLine("\n-- Admin Menu --");
-            Console.WriteLine("1. Animals");
-            Console.WriteLine("2. Users");
-            Console.WriteLine("3. Adoptions");
-            Console.WriteLine("4. Care Notes");
-            Console.WriteLine("5. Vaccines");
-            Console.WriteLine("0. Back");
+            Console.WriteLine("\n========== Admin Menu ==========");
+            Console.WriteLine("  1. Animals");
+            Console.WriteLine("  2. Users");
+            Console.WriteLine("  3. Adoptions");
+            Console.WriteLine("  4. Care Notes");
+            Console.WriteLine("  5. Vaccines");
+            Console.WriteLine("  0. Logout");
+            Console.Write("\nChoose: ");
 
-            switch (Console.ReadLine())
+            switch (Console.ReadLine()?.Trim())
             {
                 case "1": _animalsController.ShowAnimalMenu(currentUser); break;
                 case "2": ShowAdminUsersMenu(currentUser); break;
-                case "3": ShowAdoptionMenu(currentUser, includeAdminActions: true); break;
-                case "4": ShowCareNoteMenu(currentUser, includeAdminActions: true); break;
-                case "5": ShowVaccineMenu(currentUser, includeAdminActions: true); break;
+                case "3": ShowAdoptionMenu(currentUser, isAdminOrEmployee: true); break;
+                case "4": ShowCareNoteMenu(currentUser, isAdminOrEmployee: true); break;
+                case "5": ShowVaccineMenu(currentUser, isAdminOrEmployee: true); break;
                 case "0": return;
-                default: Console.WriteLine("Invalid option"); break;
+                default: Console.WriteLine("Invalid option. Try again."); break;
             }
         }
     }
 
+    
     private void ShowEmployeeMenu(UserDto currentUser)
     {
         while (true)
         {
-            Console.WriteLine("\n-- Employee Menu --");
-            Console.WriteLine("1. Animals");
-            Console.WriteLine("2. Adoptions");
-            Console.WriteLine("3. Care Notes");
-            Console.WriteLine("4. Vaccines");
-            Console.WriteLine("5. My Profile");
-            Console.WriteLine("0. Back");
+            Console.WriteLine("\n========== Employee Menu ==========");
+            Console.WriteLine("  1. Animals");
+            Console.WriteLine("  2. Adoptions");
+            Console.WriteLine("  3. Care Notes");
+            Console.WriteLine("  4. Vaccines");
+            Console.WriteLine("  5. My Profile");
+            Console.WriteLine("  0. Logout");
+            Console.Write("\nChoose: ");
 
-            switch (Console.ReadLine())
+            switch (Console.ReadLine()?.Trim())
             {
                 case "1": _animalsController.ShowAnimalMenu(currentUser); break;
-                case "2": ShowAdoptionMenu(currentUser, includeAdminActions: false); break;
-                case "3": ShowCareNoteMenu(currentUser, includeAdminActions: false); break;
-                case "4": ShowVaccineMenu(currentUser, includeAdminActions: false); break;
+                case "2": ShowAdoptionMenu(currentUser, isAdminOrEmployee: true); break;
+                case "3": ShowCareNoteMenu(currentUser, isAdminOrEmployee: true); break;
+                case "4": ShowVaccineMenu(currentUser, isAdminOrEmployee: true); break;
                 case "5": PrintProfile(currentUser); break;
                 case "0": return;
-                default: Console.WriteLine("Invalid option"); break;
+                default: Console.WriteLine("Invalid option. Try again."); break;
             }
         }
     }
 
+    
     private void ShowUserMenu(UserDto currentUser)
     {
         while (true)
         {
-            Console.WriteLine("\n-- User Menu --");
-            Console.WriteLine("1. Animals");
-            Console.WriteLine("2. Adopt Animal");
-            Console.WriteLine("3. My Profile");
-            Console.WriteLine("0. Back");
+            Console.WriteLine("\n========== User Menu ==========");
+            Console.WriteLine("  1. Browse Animals");
+            Console.WriteLine("  2. Adopt Animal");
+            Console.WriteLine("  3. My Profile");
+            Console.WriteLine("  0. Logout");
+            Console.Write("\nChoose: ");
 
-            switch (Console.ReadLine())
+            switch (Console.ReadLine()?.Trim())
             {
                 case "1": _animalsController.ShowAnimalMenu(currentUser); break;
                 case "2": AdoptAnimalInteractive(currentUser); break;
                 case "3": PrintProfile(currentUser); break;
                 case "0": return;
-                default: Console.WriteLine("Invalid option"); break;
+                default: Console.WriteLine("Invalid option. Try again."); break;
             }
         }
     }
 
+    
     private void ShowAdminUsersMenu(UserDto currentUser)
     {
         while (true)
         {
-            Console.WriteLine("\n-- Users (Admin) --");
-            Console.WriteLine("1. Add User");
-            Console.WriteLine("2. View All Users");
-            Console.WriteLine("3. Find User By Email");
-            Console.WriteLine("4. Update User");
-            Console.WriteLine("5. Delete User");
-            Console.WriteLine("0. Back");
+            Console.WriteLine("\n========== Users (Admin) ==========");
+            Console.WriteLine("  1. Add User");
+            Console.WriteLine("  2. View All Users");
+            Console.WriteLine("  3. Find User By Email");
+            Console.WriteLine("  4. Update User");
+            Console.WriteLine("  5. Delete User");
+            Console.WriteLine("  0. Back");
+            Console.Write("\nChoose: ");
 
-            switch (Console.ReadLine())
+            switch (Console.ReadLine()?.Trim())
             {
                 case "1": AddUserInteractive(currentUser); break;
                 case "2": ViewAllUsersInteractive(); break;
@@ -135,94 +147,107 @@ public class UsersController
                 case "4": UpdateUserInteractive(currentUser); break;
                 case "5": DeleteUserInteractive(currentUser); break;
                 case "0": return;
-                default: Console.WriteLine("Invalid option"); break;
+                default: Console.WriteLine("Invalid option. Try again."); break;
             }
         }
     }
 
-    private void ShowAdoptionMenu(UserDto currentUser, bool includeAdminActions)
+    
+    private void ShowAdoptionMenu(UserDto currentUser, bool isAdminOrEmployee)
     {
         while (true)
         {
-            Console.WriteLine("\n-- Adoptions --");
-            Console.WriteLine("1. Adopt Animal");
-            Console.WriteLine("2. View All Adoptions");
-            Console.WriteLine("3. View Adoption By Id");
+            Console.WriteLine("\n========== Adoptions ==========");
+            Console.WriteLine("  1. Adopt Animal");
+            Console.WriteLine("  2. View All Adoptions");
+            Console.WriteLine("  3. View Adoption By Id");
 
-            if (includeAdminActions)
+            if (isAdminOrEmployee)
             {
-                Console.WriteLine("4. Update Adoption");
-                Console.WriteLine("5. Delete Adoption");
+                Console.WriteLine("  4. Update Adoption");
+                Console.WriteLine("  5. Delete Adoption");
             }
 
-            Console.WriteLine("0. Back");
+            Console.WriteLine("  0. Back");
+            Console.Write("\nChoose: ");
 
-            switch (Console.ReadLine())
+            switch (Console.ReadLine()?.Trim())
             {
                 case "1": AdoptAnimalInteractive(currentUser); break;
                 case "2": ViewAllAdoptionsInteractive(); break;
                 case "3": ViewAdoptionByIdInteractive(); break;
-                case "4" when includeAdminActions: UpdateAdoptionInteractive(currentUser); break;
-                case "5" when includeAdminActions: DeleteAdoptionInteractive(currentUser); break;
+                case "4" when isAdminOrEmployee: UpdateAdoptionInteractive(currentUser); break;
+                case "5" when isAdminOrEmployee: DeleteAdoptionInteractive(currentUser); break;
                 case "0": return;
-                default: Console.WriteLine("Invalid option"); break;
+                default: Console.WriteLine("Invalid option. Try again."); break;
             }
         }
     }
 
-    private void ShowCareNoteMenu(UserDto currentUser, bool includeAdminActions)
+    
+    private void ShowCareNoteMenu(UserDto currentUser, bool isAdminOrEmployee)
     {
         while (true)
         {
-            Console.WriteLine("\n-- Care Notes --");
-            Console.WriteLine("1. Add Note");
-            Console.WriteLine("2. Update Note");
-            Console.WriteLine("3. Delete Note");
-            Console.WriteLine("0. Back");
+            Console.WriteLine("\n========== Care Notes ==========");
+            Console.WriteLine("  1. Add Note");
 
-            switch (Console.ReadLine())
+            if (isAdminOrEmployee)
+            {
+                Console.WriteLine("  2. Update Note");
+                Console.WriteLine("  3. Delete Note");
+            }
+
+            Console.WriteLine("  0. Back");
+            Console.Write("\nChoose: ");
+
+            switch (Console.ReadLine()?.Trim())
             {
                 case "1": AddCareNoteInteractive(currentUser); break;
-                case "2" when includeAdminActions || currentUser.Role == EnumRole.Employee: UpdateCareNoteInteractive(currentUser); break;
-                case "3" when includeAdminActions || currentUser.Role == EnumRole.Employee: DeleteCareNoteInteractive(); break;
+                case "2" when isAdminOrEmployee: UpdateCareNoteInteractive(currentUser); break;
+                case "3" when isAdminOrEmployee: DeleteCareNoteInteractive(); break;
                 case "0": return;
-                default: Console.WriteLine("Invalid option"); break;
+                default: Console.WriteLine("Invalid option. Try again."); break;
             }
         }
     }
 
-    private void ShowVaccineMenu(UserDto currentUser, bool includeAdminActions)
+    
+    private void ShowVaccineMenu(UserDto currentUser, bool isAdminOrEmployee)
     {
         while (true)
         {
-            Console.WriteLine("\n-- Vaccines --");
-            Console.WriteLine("1. Add Vaccine");
-            Console.WriteLine("2. View All Vaccines");
-            Console.WriteLine("3. View Vaccine By Id");
+            Console.WriteLine("\n========== Vaccines ==========");
+            Console.WriteLine("  1. Add Vaccine");
+            Console.WriteLine("  2. View All Vaccines");
+            Console.WriteLine("  3. View Vaccine By Id");
 
-            if (includeAdminActions)
+            if (isAdminOrEmployee)
             {
-                Console.WriteLine("4. Update Vaccine");
-                Console.WriteLine("5. Delete Vaccine");
+                Console.WriteLine("  4. Update Vaccine");
+                Console.WriteLine("  5. Delete Vaccine");
             }
 
-            Console.WriteLine("0. Back");
+            Console.WriteLine("  0. Back");
+            Console.Write("\nChoose: ");
 
-            switch (Console.ReadLine())
+            switch (Console.ReadLine()?.Trim())
             {
                 case "1": AddVaccineInteractive(currentUser); break;
                 case "2": ViewAllVaccinesInteractive(); break;
                 case "3": ViewVaccineByIdInteractive(); break;
-                case "4" when includeAdminActions: UpdateVaccineInteractive(currentUser); break;
-                case "5" when includeAdminActions: DeleteVaccineInteractive(currentUser); break;
+                case "4" when isAdminOrEmployee: UpdateVaccineInteractive(currentUser); break;
+                case "5" when isAdminOrEmployee: DeleteVaccineInteractive(currentUser); break;
                 case "0": return;
-                default: Console.WriteLine("Invalid option"); break;
+                default: Console.WriteLine("Invalid option. Try again."); break;
             }
         }
     }
 
+    
     private void AddUserInteractive(UserDto currentUser)
     {
+        Console.WriteLine("\n--- Add User ---");
         var dto = new CreateUserDto
         {
             UserName = Helpers.ReadString("Username: "),
@@ -240,16 +265,15 @@ public class UsersController
             var users = _userService.GetAllUsers();
             if (users == null || users.Count == 0)
             {
-                Console.WriteLine("No users found.");
+                Console.WriteLine("\nNo users found.");
                 return;
-            }   
-
-            foreach (var user in users)
-            {
-                
-                
-                Console.WriteLine($"Id: {user.Id} | {user.Username} | {user.Email} | Role: {user.Role}");
             }
+
+            Console.WriteLine($"\nFound {users.Count} user(s):\n");
+            Console.WriteLine($"  {"Id",-5} {"Username",-20} {"Email",-35} {"Role",-12}");
+            Console.WriteLine(new string('-', 75));
+            foreach (var user in users)
+                Console.WriteLine($"  {user.Id,-5} {user.Username,-20} {user.Email,-35} {user.Role,-12}");
         });
     }
 
@@ -259,7 +283,17 @@ public class UsersController
         Helpers.TryExecute(() =>
         {
             var user = _userService.GetUserByEmail(email);
-            Console.WriteLine($"Id: {user.Id}\nUsername: {user.Username}\nEmail: {user.Email}\nRole: {user.Role}");
+            Console.WriteLine($"\n  Id       : {user.Id}");
+            Console.WriteLine($"  Username : {user.Username}");
+            Console.WriteLine($"  Email    : {user.Email}");
+            Console.WriteLine($"  Role     : {user.Role}");
+
+            if (user.Adoptions != null && user.Adoptions.Count > 0)
+            {
+                Console.WriteLine($"\n  Adoptions ({user.Adoptions.Count}):");
+                foreach (var a in user.Adoptions)
+                    Console.WriteLine($"    - [{a.id}] {a.Animal?.Name} on {a.AdoptedAt:yyyy-MM-dd}");
+            }
         });
     }
 
@@ -268,8 +302,8 @@ public class UsersController
         var email = Helpers.ReadString("Existing user email: ");
         var updateDto = new UpdateUserDto
         {
-            Username = Helpers.ReadOptionalString("New username (leave blank to keep): "),
-            Email = Helpers.ReadOptionalString("New email (leave blank to keep): "),
+            Username = Helpers.ReadOptionalString("New username (press Enter to keep): "),
+            Email = Helpers.ReadOptionalString("New email (press Enter to keep): "),
             RoleId = ParseOptionalRoleId()
         };
 
@@ -279,8 +313,8 @@ public class UsersController
     private void DeleteUserInteractive(UserDto currentUser)
     {
         var email = Helpers.ReadString("Email to delete: ");
-        Console.Write($"Confirm delete {email}? (y/N): ");
-        if (Console.ReadLine()?.ToLowerInvariant() != "y")
+        Console.Write($"Confirm delete '{email}'? (y/N): ");
+        if (Console.ReadLine()?.Trim().ToLowerInvariant() != "y")
         {
             Console.WriteLine("Cancelled.");
             return;
@@ -289,12 +323,14 @@ public class UsersController
         Helpers.TryExecute(() => _userService.DeleteUser(email, currentUser.Username), "User deleted.");
     }
 
+    
     private void AdoptAnimalInteractive(UserDto currentUser)
     {
         var animalId = Helpers.ReadInt("Animal Id: ");
-
         var adopterId = currentUser.Id;
-        if (currentUser.Role == EnumRole.Admin)
+
+        // Admins can adopt on behalf of another user
+        if (_authService.CanManage(currentUser))
         {
             Console.Write("Adopt as another user? (y/N): ");
             if (Console.ReadLine()?.Trim().ToLowerInvariant() == "y")
@@ -314,10 +350,11 @@ public class UsersController
             var adoptions = _adoptionService.GetAllAdoptions();
             if (adoptions == null || adoptions.Count == 0)
             {
-                Console.WriteLine("No adoptions found.");
+                Console.WriteLine("\nNo adoptions found.");
                 return;
             }
 
+            Console.WriteLine($"\nFound {adoptions.Count} adoption(s):\n");
             foreach (var adoption in adoptions)
                 Helpers.PrintAdoption(adoption);
         });
@@ -326,7 +363,11 @@ public class UsersController
     private void ViewAdoptionByIdInteractive()
     {
         var id = Helpers.ReadInt("Adoption Id: ");
-        Helpers.TryExecute(() => Helpers.PrintAdoption(_adoptionService.GetAdoptionById(id)));
+        Helpers.TryExecute(() =>
+        {
+            Console.WriteLine();
+            Helpers.PrintAdoption(_adoptionService.GetAdoptionById(id));
+        });
     }
 
     private void UpdateAdoptionInteractive(UserDto currentUser)
@@ -334,9 +375,9 @@ public class UsersController
         var id = Helpers.ReadInt("Adoption Id: ");
         var dto = new UpdateAdoptionDto
         {
-            UserId = ParseOptionalIntFromEmail("New adopter email (leave blank to keep): "),
-            AnimalId = Helpers.ParseOptionalInt("New animal id (leave blank to keep): "),
-            AdoptedAt = Helpers.ReadOptionalDateTime("New adopted date (leave blank to keep): ")
+            UserId = ParseOptionalUserIdFromEmail("New adopter email (press Enter to keep): "),
+            AnimalId = Helpers.ParseOptionalInt("New animal id (press Enter to keep): "),
+            AdoptedAt = Helpers.ReadOptionalDateTime("New adopted date (press Enter to keep): ")
         };
 
         Helpers.TryExecute(() => _adoptionService.UpdateAdoption(id, dto, currentUser.Username), "Adoption updated.");
@@ -346,7 +387,7 @@ public class UsersController
     {
         var id = Helpers.ReadInt("Adoption Id: ");
         Console.Write($"Confirm delete adoption {id}? (y/N): ");
-        if (Console.ReadLine()?.ToLowerInvariant() != "y")
+        if (Console.ReadLine()?.Trim().ToLowerInvariant() != "y")
         {
             Console.WriteLine("Cancelled.");
             return;
@@ -355,8 +396,10 @@ public class UsersController
         Helpers.TryExecute(() => _adoptionService.DeleteAdoption(id, currentUser.Username), "Adoption deleted.");
     }
 
+    
     private void AddCareNoteInteractive(UserDto currentUser)
     {
+        Console.WriteLine("\n--- Add Care Note ---");
         var dto = new AddCareNoteDto
         {
             Title = Helpers.ReadString("Title: "),
@@ -384,7 +427,7 @@ public class UsersController
     {
         var id = Helpers.ReadInt("Note Id: ");
         Console.Write($"Confirm delete note {id}? (y/N): ");
-        if (Console.ReadLine()?.ToLowerInvariant() != "y")
+        if (Console.ReadLine()?.Trim().ToLowerInvariant() != "y")
         {
             Console.WriteLine("Cancelled.");
             return;
@@ -393,12 +436,14 @@ public class UsersController
         Helpers.TryExecute(() => _careNoteService.DeleteNote(id), "Care note deleted.");
     }
 
+    
     private void AddVaccineInteractive(UserDto currentUser)
     {
+        Console.WriteLine("\n--- Add Vaccine ---");
         var dto = new AddVaccineDto
         {
             VaccineName = Helpers.ReadString("Vaccine name: "),
-            VaccineDescription = Helpers.ReadOptionalString("Description (optional): ") ?? string.Empty,
+            VaccineDescription = Helpers.ReadOptionalString("Description (optional, press Enter to skip): ") ?? string.Empty,
             AnimalId = Helpers.ReadInt("Animal Id: ")
         };
 
@@ -412,10 +457,11 @@ public class UsersController
             var vaccines = _vaccineService.GetAllVaccines();
             if (vaccines == null || vaccines.Count == 0)
             {
-                Console.WriteLine("No vaccines found.");
+                Console.WriteLine("\nNo vaccines found.");
                 return;
             }
 
+            Console.WriteLine($"\nFound {vaccines.Count} vaccine(s):\n");
             foreach (var vaccine in vaccines)
                 Helpers.PrintVaccine(vaccine);
         });
@@ -424,7 +470,11 @@ public class UsersController
     private void ViewVaccineByIdInteractive()
     {
         var id = Helpers.ReadInt("Vaccine Id: ");
-        Helpers.TryExecute(() => Helpers.PrintVaccine(_vaccineService.GetVaccineById(id)));
+        Helpers.TryExecute(() =>
+        {
+            Console.WriteLine();
+            Helpers.PrintVaccine(_vaccineService.GetVaccineById(id));
+        });
     }
 
     private void UpdateVaccineInteractive(UserDto currentUser)
@@ -433,7 +483,7 @@ public class UsersController
         var dto = new UpdateVaccineDto
         {
             VaccineName = Helpers.ReadString("Vaccine name: "),
-            VaccineDescription = Helpers.ReadOptionalString("Description (optional): ") ?? string.Empty,
+            VaccineDescription = Helpers.ReadOptionalString("Description (optional, press Enter to skip): ") ?? string.Empty,
             AnimalId = Helpers.ReadInt("Animal Id: ")
         };
 
@@ -444,7 +494,7 @@ public class UsersController
     {
         var id = Helpers.ReadInt("Vaccine Id: ");
         Console.Write($"Confirm delete vaccine {id}? (y/N): ");
-        if (Console.ReadLine()?.ToLowerInvariant() != "y")
+        if (Console.ReadLine()?.Trim().ToLowerInvariant() != "y")
         {
             Console.WriteLine("Cancelled.");
             return;
@@ -453,16 +503,19 @@ public class UsersController
         Helpers.TryExecute(() => _vaccineService.DeleteVaccineById(id, currentUser.Username), "Vaccine deleted.");
     }
 
+    
     private static void PrintProfile(UserDto currentUser)
     {
-        Console.WriteLine($"Id: {currentUser.Id}");
-        Console.WriteLine($"Username: {currentUser.Username}");
-        Console.WriteLine($"Email: {currentUser.Email}");
-        Console.WriteLine($"Role: {currentUser.Role}");
+        Console.WriteLine("\n========== My Profile ==========");
+        Console.WriteLine($"  Id       : {currentUser.Id}");
+        Console.WriteLine($"  Username : {currentUser.Username}");
+        Console.WriteLine($"  Email    : {currentUser.Email}");
+        Console.WriteLine($"  Role     : {currentUser.Role}");
+        Console.WriteLine(new string('=', 34));
     }
 
-
-    private int? ParseOptionalIntFromEmail(string prompt)
+    
+    private int? ParseOptionalUserIdFromEmail(string prompt)
     {
         var email = Helpers.ReadOptionalString(prompt);
         if (string.IsNullOrWhiteSpace(email))
@@ -473,9 +526,11 @@ public class UsersController
 
     private static int? ParseOptionalRoleId()
     {
-        var roleInput = Helpers.ReadOptionalString("New role id (1=Admin,2=Employee,3=User) leave blank to keep: ");
+        Console.WriteLine("\n  Role options:");
+        Console.WriteLine("  1 = Admin");
+        Console.WriteLine("  2 = Employee");
+        Console.WriteLine("  3 = User");
+        var roleInput = Helpers.ReadOptionalString("New role (1/2/3, press Enter to keep): ");
         return int.TryParse(roleInput, out var parsed) ? parsed : null;
     }
-
-    
 }

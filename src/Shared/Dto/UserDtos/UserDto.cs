@@ -1,11 +1,11 @@
 ﻿using AnimalShelter.src.Models;
-using AnimalShelter.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AnimalShelter.src.Shared.Dto.Adoption;
 
 
-    public class UserDto
+public class UserDto
     {
          public int Id { get; set; }
         public string Username { get; set; } = string.Empty;
