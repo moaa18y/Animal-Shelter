@@ -1,11 +1,14 @@
 
 using AnimalShelter.CustomException;
-using AnimalShelter.src.Repositories.Implementations;
-using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.CustomException;
 using AnimalShelter.Dto;
 using AnimalShelter.Dto.UserDtos;
+using AnimalShelter.src.Models;
+using AnimalShelter.src.Repositories.Implementations;
 using AnimalShelter.src.Repositories.Interfaces;
+using AnimalShelter.src.Repositories.Interfaces;
+using AnimalShelter.src.Shared.Dto;
+using AnimalShelter.src.Shared.Dto.AnimalDtos;
 using Azure;
 using System;
 using System.Collections.Generic;
@@ -77,13 +80,14 @@ namespace AnimalShelter.src.Services.Implementation
                 CanFly = animalM.CanFly,
                 AnimalType = animalM.AnimalType,
                 IsNocturnal = animalM.IsNocturnal,
-                Vaccines = animalM.Vaccines.Select(v => new GetVaccineDto
+                Vaccines = (animalM.Vaccines ?? new List<Vaccine>()).Select(v => new GetVaccineDto
                 {
                     Id = v.VaccineId,
                     VaccineName = v.VaccineName,
                     VaccineDate = v.VaccineDate
+
                 }).ToList(),
-                careNotes = animalM.CareNotes.Select(c => new GetCareNoteDto
+                careNotes = (animalM.CareNotes ?? new List<CareNote>()).Select(c => new GetCareNoteDto
                 {
                     id = c.Id,
                     Title = c.Title,
@@ -110,13 +114,13 @@ namespace AnimalShelter.src.Services.Implementation
                 CanFly = a.CanFly,
                 AnimalType = a.AnimalType,
                 IsNocturnal = a.IsNocturnal,
-                Vaccines = a.Vaccines.Select(v => new GetVaccineDto
+                Vaccines = (a.Vaccines ?? new List<Vaccine>()).Select(v => new GetVaccineDto
                 {
                     Id = v.VaccineId,
                     VaccineName = v.VaccineName,
                     VaccineDate = v.VaccineDate
                 }).ToList(),
-                careNotes = a.CareNotes.Select(c => new GetCareNoteDto
+                careNotes = (a.CareNotes ?? new List<CareNote>()).Select(c => new GetCareNoteDto
                 {
                     id = c.Id,
                     Title = c.Title,

@@ -1,6 +1,5 @@
 ﻿using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.CustomException;
-using AnimalShelter.Dto;
 using AnimalShelter.src.Models;
 using AnimalShelter.src.Repositories.Implementations;
 using AnimalShelter.src.Repositories.Interfaces;
@@ -8,6 +7,7 @@ using AnimalShelter.src.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AnimalShelter.src.Shared.Dto.CareNoteDtos;
 
 namespace AnimalShelter.src.Services.Implementation
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AnimalShelter.src.Models.GlobalFiles
+namespace AnimalShelter.src.Shared.GlobalFiles
 {
     public enum EnumAnimalSize
     {

@@ -1,9 +1,9 @@
 ﻿using AnimalShelter.CustomException;
-using AnimalShelter.Dto;
-using AnimalShelter.Dto.UserDtos;
+using AnimalShelter.src.Models;
 using AnimalShelter.src.Repositories.Implementations;
 using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Services.Interfaces;
+using AnimalShelter.src.Shared.Dto.UserDtos;
 using AnimalShelter.src.Shared.Dtos;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -47,16 +47,16 @@ namespace AnimalShelter.src.Services.Implementation
         public void DeleteUser(string email, string DeletedBy)
         {
             var user = _userRepo.GetAllUserInfoByEmail(email);
-            if(user is null)
+            if (user is null)
             {
                 throw new UserNotFoundException();
             }
-            
+
             _userRepo.DeleteUser(user, DeletedBy);
             _userRepo.SaveChange();
 
         }
-        
+
 
         public List<UserDto> GetAllUsers()
         {
@@ -67,66 +67,12 @@ namespace AnimalShelter.src.Services.Implementation
                 Id = u.UserId,
                 Username = u.UserName,
                 Email = u.UserEmail,
-                Role=u.Role.RoleName,
-                Adoptions= u.Adoptions.Select(a=> new AdoptionsDto
-                {
-                    id = a.AdoptionId,
-                    AdoptedAt=a.AdoptedAt,
-                    Animal=new GetAnimalDto
-                    {
-                        Id=a.AnimalId,
-                        Name=a.Animal.Name,
-                        Age=a.Animal.Age,
-                        Species=a.Animal.Species,
-                        Status=a.Animal.Status,
-                        Breed=a.Animal.Breed,
-                        Size=a.Animal.Size,
-                        Color=a.Animal.Color,
-                        IsIndoor=a.Animal.IsIndoor,
-                        CanFly=a.Animal.CanFly,
-                        AnimalType=a.Animal.AnimalType,
-                        IsNocturnal =a.Animal.IsNocturnal,
-                        Vaccines=a.Animal.Vaccines.Select(v=>new GetVaccineDto
-                        {
-                            Id=v.VaccineId,
-                            VaccineName=v.VaccineName,
-                            VaccineDate=v.VaccineDate
-
-                        }).ToList(),
-                        careNotes=a.Animal.CareNotes.Select(c=>new GetCareNoteDto
-                        {  id=c.Id,
-                           Title=c.Title,
-                           Description=c.Description
-
-                        }).ToList()
-                        
-                    }
-                }).ToList()
-               
-            }).ToList();
-
-        }
-
-
-        public UserDto GetUserByEmail(string email)
-        {
-
-            var user = _userRepo.GetUserByEmailReadOnly(email);
-            if(user is null)
-            {
-                throw new UserNotFoundException();
-            }
-            return  new UserDto
-            {
-                Id = user.UserId,
-                Username = user.UserName,
-                Email = user.UserEmail,
-                Role = user.Role.RoleName,
-                Adoptions = user.Adoptions.Select(a => new AdoptionsDto
+                Role = u.Role.RoleName,
+                Adoptions = (u.Adoptions ?? new List<Adoption>()).Select(a => new AdoptionsDto
                 {
                     id = a.AdoptionId,
                     AdoptedAt = a.AdoptedAt,
-                    Animal = new GetAnimalDto
+                    Animal = a.Animal == null ? null : new GetAnimalDto
                     {
                         Id = a.AnimalId,
                         Name = a.Animal.Name,
@@ -140,14 +86,69 @@ namespace AnimalShelter.src.Services.Implementation
                         CanFly = a.Animal.CanFly,
                         AnimalType = a.Animal.AnimalType,
                         IsNocturnal = a.Animal.IsNocturnal,
-                        Vaccines = a.Animal.Vaccines.Select(v => new GetVaccineDto
+                        Vaccines = (a.Animal.Vaccines ?? new List<Vaccine>()).Select(v => new GetVaccineDto
                         {
                             Id = v.VaccineId,
                             VaccineName = v.VaccineName,
                             VaccineDate = v.VaccineDate
 
                         }).ToList(),
-                        careNotes = a.Animal.CareNotes.Select(c => new GetCareNoteDto
+                        careNotes = (a.Animal.CareNotes ?? new List<CareNote>()).Select(c => new GetCareNoteDto
+                        {
+                            id = c.Id,
+                            Title = c.Title,
+                            Description = c.Description
+
+                        }).ToList()
+
+                    }
+                }).ToList()
+
+            }).ToList();
+
+        }
+
+
+        public UserDto GetUserByEmail(string email)
+        {
+
+            var user = _userRepo.GetUserByEmailReadOnly(email);
+            if (user is null)
+            {
+                throw new UserNotFoundException();
+            }
+            return new UserDto
+            {
+                Id = user.UserId,
+                Username = user.UserName,
+                Email = user.UserEmail,
+                Role = user.Role.RoleName,
+                Adoptions = (user.Adoptions ?? new List<Adoption>()).Select(a => new AdoptionsDto
+                {
+                    id = a.AdoptionId,
+                    AdoptedAt = a.AdoptedAt,
+                    Animal = a.Animal == null ? null : new GetAnimalDto
+                    {
+                        Id = a.AnimalId,
+                        Name = a.Animal.Name,
+                        Age = a.Animal.Age,
+                        Species = a.Animal.Species,
+                        Status = a.Animal.Status,
+                        Breed = a.Animal.Breed,
+                        Size = a.Animal.Size,
+                        Color = a.Animal.Color,
+                        IsIndoor = a.Animal.IsIndoor,
+                        CanFly = a.Animal.CanFly,
+                        AnimalType = a.Animal.AnimalType,
+                        IsNocturnal = a.Animal.IsNocturnal,
+                        Vaccines = (a.Animal.Vaccines ?? new List<Vaccine>()).Select(v => new GetVaccineDto
+                        {
+                            Id = v.VaccineId,
+                            VaccineName = v.VaccineName,
+                            VaccineDate = v.VaccineDate
+
+                        }).ToList(),
+                        careNotes = (a.Animal.CareNotes ?? new List<CareNote>()).Select(c => new GetCareNoteDto
                         {
                             id = c.Id,
                             Title = c.Title,
@@ -162,7 +163,7 @@ namespace AnimalShelter.src.Services.Implementation
 
         public void UpdateUser(string email, UpdateUserDto UpdateUser, string updatedBy)
         {
-            var user = _userRepo.GetAllUserInfoByEmail( email);
+            var user = _userRepo.GetAllUserInfoByEmail(email);
             if (user is null)
             {
                 throw new UserNotFoundException();
@@ -172,9 +173,9 @@ namespace AnimalShelter.src.Services.Implementation
 
             _userRepo.SaveChange();
 
-            
+
         }
 
-        
+
     }
 }

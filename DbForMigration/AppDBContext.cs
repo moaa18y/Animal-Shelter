@@ -1,9 +1,9 @@
 ﻿using AnimalShelter.src.Models;
-using AnimalShelter.src.Models.GlobalFiles;
 using Microsoft.EntityFrameworkCore;
 using System;
 using BCrypt.Net;
 using System.Collections.Generic;
+using AnimalShelter.src.Shared.GlobalFiles;
 
 namespace AnimalShelter.DbForMigration
 {

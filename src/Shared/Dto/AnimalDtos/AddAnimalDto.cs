@@ -1,10 +1,10 @@
-﻿using AnimalShelter.src.Models.GlobalFiles;
+﻿using AnimalShelter.src.Shared.GlobalFiles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace AnimalShelter.Dto
+namespace AnimalShelter.src.Shared.Dto.AnimalDtos
 {
     public class AddAnimalDto
     {

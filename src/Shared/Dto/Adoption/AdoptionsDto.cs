@@ -1,8 +1,9 @@
-﻿using System;
+﻿using AnimalShelter.src.Shared.Dto.AnimalDtos;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AnimalShelter.Dto
+namespace AnimalShelter.src.Shared.Dto.Adoption
 {
     public class AdoptionsDto
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace AnimalShelter.Dto
+namespace AnimalShelter.src.Shared.Dto.Adoption
 {
     public class UpdateAdoptionDto
     {

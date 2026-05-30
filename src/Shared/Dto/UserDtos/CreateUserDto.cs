@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace AnimalShelter.Dto
+namespace AnimalShelter.src.Shared.Dto.UserDtos
 {
     
     public class CreateUserDto

@@ -1,6 +1,6 @@
 using System;
 
-namespace AnimalShelter.Shared
+namespace AnimalShelter.src.Shared.Dto.UserDtos
 {
     // Shared DTOs for controllers (lightweight adapters)
     public class SimpleUserDto

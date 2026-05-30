@@ -1,6 +1,6 @@
 ﻿using AnimalShelter.Dto;
-using AnimalShelter.Dto.UserDtos;
 using AnimalShelter.src.Models;
+using AnimalShelter.src.Shared.Dto.UserDtos;
 using System;
 using System.Collections.Generic;
 using System.Text;

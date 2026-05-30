@@ -1,10 +1,12 @@
 ﻿using AnimalShelter.src.Models;
-using AnimalShelter.src.Models.GlobalFiles;
+using AnimalShelter.src.Shared.Dto.CareNoteDtos;
+using AnimalShelter.src.Shared.Dto.Vaccine;
+using AnimalShelter.src.Shared.GlobalFiles;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AnimalShelter.Dto
+namespace AnimalShelter.src.Shared.Dto.AnimalDtos
 {
     public class GetAnimalDto
     {

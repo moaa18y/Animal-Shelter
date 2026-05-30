@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using AnimalShelter.CustomException;
 using AnimalShelter.src.Models;
-using AnimalShelter.Dto;
 using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Services.Interfaces;
+using AnimalShelter.src.Shared.Dto.Adoption;
 
 namespace AnimalShelter.src.Services.Implementation
 {
