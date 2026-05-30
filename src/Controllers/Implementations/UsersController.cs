@@ -1,7 +1,8 @@
 using System;
-using AnimalShelter.Dto;
-using AnimalShelter.Dto.UserDtos;
-using AnimalShelter.src.Models.GlobalFiles;
+using System;
+using AnimalShelter.src.Shared.Dto;
+using AnimalShelter.src.Shared.Dto.UserDtos;
+using AnimalShelter.src.Shared.GlobalFiles;
 using AnimalShelter.src.Services.Interfaces;
 using AnimalShelter.Shared;
 
@@ -373,7 +374,7 @@ public class UsersController
     private void UpdateAdoptionInteractive(UserDto currentUser)
     {
         var id = Helpers.ReadInt("Adoption Id: ");
-        var dto = new UpdateAdoptionDto
+        var dto = new AnimalShelter.src.Shared.Dto.Adoption.UpdateAdoptionDto
         {
             UserId = ParseOptionalUserIdFromEmail("New adopter email (press Enter to keep): "),
             AnimalId = Helpers.ParseOptionalInt("New animal id (press Enter to keep): "),
@@ -400,7 +401,7 @@ public class UsersController
     private void AddCareNoteInteractive(UserDto currentUser)
     {
         Console.WriteLine("\n--- Add Care Note ---");
-        var dto = new AddCareNoteDto
+        var dto = new AnimalShelter.src.Shared.Dto.CareNoteDtos.AddCareNoteDto
         {
             Title = Helpers.ReadString("Title: "),
             Description = Helpers.ReadString("Description: "),
@@ -413,7 +414,7 @@ public class UsersController
     private void UpdateCareNoteInteractive(UserDto currentUser)
     {
         var id = Helpers.ReadInt("Note Id: ");
-        var dto = new UpdateCareNoteDto
+        var dto = new AnimalShelter.src.Shared.Dto.CareNoteDtos.UpdateCareNoteDto
         {
             Title = Helpers.ReadString("Title: "),
             Description = Helpers.ReadString("Description: "),
@@ -440,7 +441,7 @@ public class UsersController
     private void AddVaccineInteractive(UserDto currentUser)
     {
         Console.WriteLine("\n--- Add Vaccine ---");
-        var dto = new AddVaccineDto
+        var dto = new AnimalShelter.src.Shared.Dto.Vaccine.AddVaccineDto
         {
             VaccineName = Helpers.ReadString("Vaccine name: "),
             VaccineDescription = Helpers.ReadOptionalString("Description (optional, press Enter to skip): ") ?? string.Empty,
@@ -480,7 +481,7 @@ public class UsersController
     private void UpdateVaccineInteractive(UserDto currentUser)
     {
         var id = Helpers.ReadInt("Vaccine Id: ");
-        var dto = new UpdateVaccineDto
+        var dto = new AnimalShelter.src.Shared.Dto.Vaccine.UpdateVaccineDto
         {
             VaccineName = Helpers.ReadString("Vaccine name: "),
             VaccineDescription = Helpers.ReadOptionalString("Description (optional, press Enter to skip): ") ?? string.Empty,

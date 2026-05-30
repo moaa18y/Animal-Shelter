@@ -1,5 +1,5 @@
 using System;
-using AnimalShelter.Dto.UserDtos;
+using AnimalShelter.src.Shared.Dto.UserDtos;
 using AnimalShelter.src.Services.Interfaces;
 using AnimalShelter.Shared;
 
@@ -39,7 +39,7 @@ public class AuthorizationController
 
         try
         {
-            return _authService.Login(new AnimalShelter.Dto.LoginDto { Email = email, Password = password });
+            return _authService.Login(new AnimalShelter.src.Shared.Dto.AuthoDtos.LoginDto { Email = email, Password = password });
         }
         catch (Exception ex)
         {

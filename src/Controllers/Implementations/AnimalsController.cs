@@ -1,6 +1,6 @@
 using System;
-using AnimalShelter.Dto;
-using AnimalShelter.Dto.UserDtos;
+
+using AnimalShelter.src.Shared.Dto.UserDtos;
 using AnimalShelter.src.Services.Interfaces;
 using AnimalShelter.Shared;
 using AnimalShelter.src.Shared.GlobalFiles;
@@ -103,7 +103,7 @@ public class AnimalsController
         var age = Helpers.ReadInt("Age: ");
         var species = Helpers.ReadEnumByIndex<EnumAnimalSpecies>("Species");
 
-        var dto = new AddAnimalDto
+        var dto = new AnimalShelter.src.Shared.Dto.AnimalDtos.AddAnimalDto
         {
             Name = name,
             Age = age,
