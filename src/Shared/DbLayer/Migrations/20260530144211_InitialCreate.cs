@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace AnimalShelter.Migrations
+namespace AnimalShelter.src.Shared.DbLayer.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

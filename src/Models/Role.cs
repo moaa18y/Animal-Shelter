@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using AnimalShelter.src.Shared.Enums;
 
 
 namespace AnimalShelter.src.Models

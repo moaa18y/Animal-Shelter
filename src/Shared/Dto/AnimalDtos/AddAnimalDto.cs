@@ -1,4 +1,4 @@
-﻿using AnimalShelter.src.Shared.GlobalFiles;
+﻿using AnimalShelter.src.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

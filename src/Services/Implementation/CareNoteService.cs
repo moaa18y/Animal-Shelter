@@ -1,8 +1,7 @@
 ﻿using AnimalShelter.src.Repositories.Interfaces;
-using AnimalShelter.CustomException;
+using AnimalShelter.src.Shared.CustomException;
 using AnimalShelter.src.Models;
 using AnimalShelter.src.Repositories.Implementations;
-using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Services.Interfaces;
 using System;
 using System.Collections.Generic;

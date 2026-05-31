@@ -3,7 +3,9 @@ using System;
 using AnimalShelter.src.Shared.Dto.UserDtos;
 using AnimalShelter.src.Services.Interfaces;
 using AnimalShelter.Shared;
-using AnimalShelter.src.Shared.GlobalFiles;
+using AnimalShelter.src.Shared.CustomException;
+using AnimalShelter.src.Shared.Enums;
+using AnimalShelter.Shared.Menus;
 
 public class AnimalsController
 {
@@ -18,23 +20,7 @@ public class AnimalsController
     {
         while (true)
         {
-            Console.WriteLine("\n========== Animals ==========");
-            Console.WriteLine("  1. View All Animals");
-            Console.WriteLine("  2. View Animal By Id");
-
-            if (currentUser.Role == EnumRole.Admin)
-            {
-                Console.WriteLine("  3. Add Animal");
-                Console.WriteLine("  4. Update Animal Status");
-                Console.WriteLine("  5. Remove Animal");
-            }
-            else if (currentUser.Role == EnumRole.Employee)
-            {
-                Console.WriteLine("  3. Update Animal Status");
-            }
-
-            Console.WriteLine("  0. Back");
-            Console.Write("\nChoose: ");
+            AppMenus.PrintAnimalsMenu(currentUser.Role == EnumRole.Admin);
 
             var choice = Console.ReadLine()?.Trim();
             switch (choice)
@@ -74,7 +60,7 @@ public class AnimalsController
             foreach (var animal in animals)
                 Helpers.PrintAnimal(animal);
         }
-        catch (Exception ex)
+        catch (AppException ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
@@ -89,7 +75,7 @@ public class AnimalsController
             Console.WriteLine();
             Helpers.PrintAnimal(animal);
         }
-        catch (Exception ex)
+        catch (AppException ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
@@ -142,7 +128,7 @@ public class AnimalsController
             _animalService.AddAnimal(dto, currentUser.Username);
             Console.WriteLine("\nAnimal added successfully.");
         }
-        catch (Exception ex)
+        catch (AppException ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
@@ -158,7 +144,7 @@ public class AnimalsController
             _animalService.UpdateStatus(id, status);
             Console.WriteLine("\nAnimal status updated successfully.");
         }
-        catch (Exception ex)
+        catch (AppException ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
@@ -179,7 +165,7 @@ public class AnimalsController
             var removed = _animalService.RemoveAnimal(id);
             Console.WriteLine(removed ? "\nAnimal removed successfully." : "\nAnimal not found.");
         }
-        catch (Exception ex)
+        catch (AppException ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
         }

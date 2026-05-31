@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using AnimalShelter.src.Shared.Dto.Adoption;
+using AnimalShelter.src.Shared.Enums;
 
 
 public class UserDto

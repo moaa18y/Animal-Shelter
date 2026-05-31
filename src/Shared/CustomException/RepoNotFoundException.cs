@@ -1,7 +1,7 @@
 using System;
-namespace AnimalShelter.CustomException
+namespace AnimalShelter.src.Shared.CustomException
 {
-    public class RepoNotFoundException: Exception
+    public class RepoNotFoundException : AppException
     {
         public RepoNotFoundException(string repoName)
             : base($"Repository '{repoName}' was not found.")

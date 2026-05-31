@@ -1,4 +1,4 @@
-﻿using AnimalShelter.DbForMigration;
+﻿using AnimalShelter.src.Shared.DbLayer;
 using AnimalShelter.src.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;

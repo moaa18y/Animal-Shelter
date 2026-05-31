@@ -1,12 +1,14 @@
-﻿using AnimalShelter.src.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-public enum EnumRole
+namespace AnimalShelter.src.Shared.Enums
+{
+    public enum EnumRole
     {
         User,
         Admin,
         Employee
     }
+}
 

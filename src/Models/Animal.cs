@@ -1,6 +1,6 @@
 using AnimalShelter.src.Models;
 using AnimalShelter.src.Models;
-using AnimalShelter.src.Shared.GlobalFiles;
+using AnimalShelter.src.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

@@ -1,8 +1,8 @@
 using System;
 
-namespace AnimalShelter.CustomException
+namespace AnimalShelter.src.Shared.CustomException
 {
-    public class InvalidAdoptionRequestException : Exception
+    public class InvalidAdoptionRequestException : AppException
     {
         public InvalidAdoptionRequestException(string message)
             : base(message)

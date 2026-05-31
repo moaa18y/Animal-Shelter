@@ -1,8 +1,8 @@
 using System;
 
-namespace AnimalShelter.CustomException
+namespace AnimalShelter.src.Shared.CustomException
 {
-    public class InvalidCareNoteException : Exception
+    public class InvalidCareNoteException : AppException
     {
         public InvalidCareNoteException(string message)
             : base(message)

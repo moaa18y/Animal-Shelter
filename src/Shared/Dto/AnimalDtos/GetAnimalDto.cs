@@ -1,7 +1,7 @@
 ﻿using AnimalShelter.src.Models;
 using AnimalShelter.src.Shared.Dto.CareNoteDtos;
 using AnimalShelter.src.Shared.Dto.Vaccine;
-using AnimalShelter.src.Shared.GlobalFiles;
+using AnimalShelter.src.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;

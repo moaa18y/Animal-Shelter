@@ -1,9 +1,11 @@
 using System;
 using AnimalShelter.src.Shared.Dto;
 using AnimalShelter.src.Shared.Dto.UserDtos;
-using AnimalShelter.src.Shared.GlobalFiles;
+using AnimalShelter.src.Shared.CustomException;
+using AnimalShelter.src.Shared.Enums;
 using AnimalShelter.src.Services.Interfaces;
 using AnimalShelter.Shared;
+using AnimalShelter.Shared.Menus;
 
 public class UsersController
 {
@@ -53,14 +55,7 @@ public class UsersController
     {
         while (true)
         {
-            Console.WriteLine("\n========== Admin Menu ==========");
-            Console.WriteLine("  1. Animals");
-            Console.WriteLine("  2. Users");
-            Console.WriteLine("  3. Adoptions");
-            Console.WriteLine("  4. Care Notes");
-            Console.WriteLine("  5. Vaccines");
-            Console.WriteLine("  0. Logout");
-            Console.Write("\nChoose: ");
+            AppMenus.PrintAdminMenu();
 
             switch (Console.ReadLine()?.Trim())
             {
@@ -80,14 +75,7 @@ public class UsersController
     {
         while (true)
         {
-            Console.WriteLine("\n========== Employee Menu ==========");
-            Console.WriteLine("  1. Animals");
-            Console.WriteLine("  2. Adoptions");
-            Console.WriteLine("  3. Care Notes");
-            Console.WriteLine("  4. Vaccines");
-            Console.WriteLine("  5. My Profile");
-            Console.WriteLine("  0. Logout");
-            Console.Write("\nChoose: ");
+            AppMenus.PrintEmployeeMenu();
 
             switch (Console.ReadLine()?.Trim())
             {
@@ -107,12 +95,7 @@ public class UsersController
     {
         while (true)
         {
-            Console.WriteLine("\n========== User Menu ==========");
-            Console.WriteLine("  1. Browse Animals");
-            Console.WriteLine("  2. Adopt Animal");
-            Console.WriteLine("  3. My Profile");
-            Console.WriteLine("  0. Logout");
-            Console.Write("\nChoose: ");
+            AppMenus.PrintUserMenu();
 
             switch (Console.ReadLine()?.Trim())
             {
@@ -130,14 +113,7 @@ public class UsersController
     {
         while (true)
         {
-            Console.WriteLine("\n========== Users (Admin) ==========");
-            Console.WriteLine("  1. Add User");
-            Console.WriteLine("  2. View All Users");
-            Console.WriteLine("  3. Find User By Email");
-            Console.WriteLine("  4. Update User");
-            Console.WriteLine("  5. Delete User");
-            Console.WriteLine("  0. Back");
-            Console.Write("\nChoose: ");
+            AppMenus.PrintAdminUsersMenu();
 
             switch (Console.ReadLine()?.Trim())
             {
@@ -157,19 +133,7 @@ public class UsersController
     {
         while (true)
         {
-            Console.WriteLine("\n========== Adoptions ==========");
-            Console.WriteLine("  1. Adopt Animal");
-            Console.WriteLine("  2. View All Adoptions");
-            Console.WriteLine("  3. View Adoption By Id");
-
-            if (isAdminOrEmployee)
-            {
-                Console.WriteLine("  4. Update Adoption");
-                Console.WriteLine("  5. Delete Adoption");
-            }
-
-            Console.WriteLine("  0. Back");
-            Console.Write("\nChoose: ");
+            AppMenus.PrintAdoptionMenu(isAdminOrEmployee);
 
             switch (Console.ReadLine()?.Trim())
             {
@@ -189,17 +153,7 @@ public class UsersController
     {
         while (true)
         {
-            Console.WriteLine("\n========== Care Notes ==========");
-            Console.WriteLine("  1. Add Note");
-
-            if (isAdminOrEmployee)
-            {
-                Console.WriteLine("  2. Update Note");
-                Console.WriteLine("  3. Delete Note");
-            }
-
-            Console.WriteLine("  0. Back");
-            Console.Write("\nChoose: ");
+            AppMenus.PrintCareNoteMenu(isAdminOrEmployee);
 
             switch (Console.ReadLine()?.Trim())
             {
@@ -217,19 +171,7 @@ public class UsersController
     {
         while (true)
         {
-            Console.WriteLine("\n========== Vaccines ==========");
-            Console.WriteLine("  1. Add Vaccine");
-            Console.WriteLine("  2. View All Vaccines");
-            Console.WriteLine("  3. View Vaccine By Id");
-
-            if (isAdminOrEmployee)
-            {
-                Console.WriteLine("  4. Update Vaccine");
-                Console.WriteLine("  5. Delete Vaccine");
-            }
-
-            Console.WriteLine("  0. Back");
-            Console.Write("\nChoose: ");
+            AppMenus.PrintVaccineMenu(isAdminOrEmployee);
 
             switch (Console.ReadLine()?.Trim())
             {
@@ -304,7 +246,7 @@ public class UsersController
         {
             Username = Helpers.ReadOptionalString("New username (press Enter to keep): "),
             Email = Helpers.ReadOptionalString("New email (press Enter to keep): "),
-            RoleId = ParseOptionalRoleId()
+            RoleId = Helpers.ParseOptionalRoleId()
         };
 
         Helpers.TryExecute(() => _userService.UpdateUser(email, updateDto, currentUser.Username), "User updated successfully.");
@@ -511,20 +453,15 @@ public class UsersController
     
     private void PrintProfile(UserDto currentUser)
     {
-        var profile = _userService.GetUserByEmail(currentUser.Email);
-
-        Console.WriteLine("\n========== My Profile ==========");
-        Console.WriteLine($"  Username : {profile.Username}");
-        Console.WriteLine($"  Email    : {profile.Email}");
-        Console.WriteLine($"  Role     : {profile.Role}");
-
-        if (profile.Adoptions != null && profile.Adoptions.Count > 0)
+        try
         {
-            Console.WriteLine($"\n  My Adoptions ({profile.Adoptions.Count}):");
-            foreach (var a in profile.Adoptions)
-                Console.WriteLine($"    - [{a.id}] {a.Animal?.Name} on {a.AdoptedAt:yyyy-MM-dd}");
+            var profile = _userService.GetUserByEmail(currentUser.Email);
+            Helpers.PrintUserProfile(profile);
         }
-        Console.WriteLine(new string('=', 34));
+        catch (AppException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
 
     
@@ -534,16 +471,15 @@ public class UsersController
         if (string.IsNullOrWhiteSpace(email))
             return null;
 
-        return _userService.GetUserByEmail(email).Id;
+        try
+        {
+            return _userService.GetUserByEmail(email).Id;
+        }
+        catch (AppException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+            return null;
+        }
     }
 
-    private static int? ParseOptionalRoleId()
-    {
-        Console.WriteLine("\n  Role options:");
-        Console.WriteLine("  1 = Admin");
-        Console.WriteLine("  2 = Employee");
-        Console.WriteLine("  3 = User");
-        var roleInput = Helpers.ReadOptionalString("New role (1/2/3, press Enter to keep): ");
-        return int.TryParse(roleInput, out var parsed) ? parsed : null;
-    }
 }

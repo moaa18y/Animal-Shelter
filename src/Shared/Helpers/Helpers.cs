@@ -1,13 +1,8 @@
 using System;
-using AnimalShelter.src.Shared.Dto.UserDtos;
-using AnimalShelter.src.Shared.Dto.Adoption;
-using AnimalShelter.src.Shared.Dto.AnimalDtos;
-using AnimalShelter.src.Shared.Dto.CareNoteDtos;
-using AnimalShelter.src.Shared.Dto.Vaccine;
-
+using AnimalShelter.src.Shared.CustomException;
 namespace AnimalShelter.Shared
 {
-    public static class Helpers
+    public static partial class Helpers
     {
         
         public static string ReadPassword()
@@ -45,7 +40,7 @@ namespace AnimalShelter.Shared
             return Console.ReadLine() ?? string.Empty;
         }
 
-        public static string? ReadOptionalString(string prompt)
+        public static string ReadOptionalString(string prompt)
         {
             Console.Write(prompt);
             var value = Console.ReadLine();
@@ -155,7 +150,7 @@ namespace AnimalShelter.Shared
             => ReadOptionalEnum<TEnum>(prompt);
 
         
-        public static void TryExecute(Action action, string? successMessage = null)
+        public static void TryExecute(Action action, string successMessage = null)
         {
             try
             {
@@ -163,87 +158,20 @@ namespace AnimalShelter.Shared
                 if (!string.IsNullOrWhiteSpace(successMessage))
                     Console.WriteLine($"\n{successMessage}");
             }
-            catch (Exception ex)
+            catch (AppException ex)
             {
                 Console.WriteLine($"\nError: {ex.Message}");
             }
         }
 
-        
-        public static void PrintAnimal(GetAnimalDto animal)
+        public static int? ParseOptionalRoleId()
         {
-            Console.WriteLine(new string('-', 40));
-            Console.WriteLine($"  Id      : {animal.Id}");
-            Console.WriteLine($"  Name    : {animal.Name}");
-            Console.WriteLine($"  Age     : {animal.Age}");
-            Console.WriteLine($"  Species : {animal.Species}");
-            Console.WriteLine($"  Status  : {animal.Status}");
-
-            
-            if (!string.IsNullOrEmpty(animal.Breed))
-                Console.WriteLine($"  Breed   : {animal.Breed}");
-            if (animal.Size.HasValue)
-                Console.WriteLine($"  Size    : {animal.Size}");
-            if (!string.IsNullOrEmpty(animal.Color))
-                Console.WriteLine($"  Color   : {animal.Color}");
-            if (animal.IsIndoor.HasValue)
-                Console.WriteLine($"  Indoor  : {(animal.IsIndoor.Value ? "Yes" : "No")}");
-            if (animal.CanFly.HasValue)
-                Console.WriteLine($"  Can Fly : {(animal.CanFly.Value ? "Yes" : "No")}");
-            if (!string.IsNullOrEmpty(animal.AnimalType))
-                Console.WriteLine($"  Type    : {animal.AnimalType}");
-            if (animal.IsNocturnal.HasValue)
-                Console.WriteLine($"  Nocturn.: {(animal.IsNocturnal.Value ? "Yes" : "No")}");
-
-            
-            if (animal.Vaccines != null && animal.Vaccines.Count > 0)
-            {
-                Console.WriteLine($"  Vaccines ({animal.Vaccines.Count}):");
-                foreach (var v in animal.Vaccines)
-                    Console.WriteLine($"    - {v.VaccineName} on {v.VaccineDate:yyyy-MM-dd}");
-            }
-
-            
-            if (animal.careNotes != null && animal.careNotes.Count > 0)
-            {
-                Console.WriteLine($"  Care Notes ({animal.careNotes.Count}):");
-                foreach (var n in animal.careNotes)
-                    Console.WriteLine($"    - [{n.id}] {n.Title}");
-            }
-
-            Console.WriteLine(new string('-', 40));
-        }
-
-        public static void PrintAdoption(AdoptionsDto adoption)
-        {
-            Console.WriteLine(new string('-', 40));
-            Console.WriteLine($"  Adoption Id : {adoption.id}");
-            Console.WriteLine($"  Adopted At  : {adoption.AdoptedAt:yyyy-MM-dd HH:mm}");
-            if (adoption.Animal != null)
-            {
-                Console.WriteLine($"  Animal Id   : {adoption.Animal.Id}");
-                Console.WriteLine($"  Animal Name : {adoption.Animal.Name}");
-                Console.WriteLine($"  Status      : {adoption.Animal.Status}");
-            }
-            Console.WriteLine(new string('-', 40));
-        }
-
-        public static void PrintVaccine(GetVaccineDto vaccine)
-        {
-            Console.WriteLine(new string('-', 40));
-            Console.WriteLine($"  Id   : {vaccine.Id}");
-            Console.WriteLine($"  Name : {vaccine.VaccineName}");
-            Console.WriteLine($"  Date : {vaccine.VaccineDate:yyyy-MM-dd}");
-            Console.WriteLine(new string('-', 40));
-        }
-
-        public static void PrintCareNote(GetCareNoteDto note)
-        {
-            Console.WriteLine(new string('-', 40));
-            Console.WriteLine($"  Id          : {note.id}");
-            Console.WriteLine($"  Title       : {note.Title}");
-            Console.WriteLine($"  Description : {note.Description}");
-            Console.WriteLine(new string('-', 40));
+            Console.WriteLine("\n  Role options:");
+            Console.WriteLine("  1 = Admin");
+            Console.WriteLine("  2 = Employee");
+            Console.WriteLine("  3 = User");
+            var roleInput = ReadOptionalString("New role (1/2/3, press Enter to keep): ");
+            return int.TryParse(roleInput, out var parsed) ? parsed : null;
         }
     }
 }

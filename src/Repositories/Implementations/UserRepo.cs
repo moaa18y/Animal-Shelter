@@ -1,6 +1,6 @@
 ﻿using AnimalShelter.src.Models;
-using AnimalShelter.CustomException;
-using AnimalShelter.DbForMigration;
+using AnimalShelter.src.Shared.CustomException;
+using AnimalShelter.src.Shared.DbLayer;
 using AnimalShelter.src.Shared.Dto.UserDtos;
 using AnimalShelter.src.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AnimalShelter.src.Shared.Dto.UserDtos;
 
 namespace AnimalShelter.src.Repositories.Implementations
 {

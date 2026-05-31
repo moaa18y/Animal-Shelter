@@ -1,6 +1,7 @@
 ﻿using AnimalShelter.src.Models;
 
 using AnimalShelter.src.Services.Interfaces;
+using AnimalShelter.src.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -1,15 +1,12 @@
 
 using Microsoft.Extensions.Hosting;
-using AnimalShelter.DbForMigration;
+using AnimalShelter.src.Shared.DbLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Repositories.Implementations;
 using AnimalShelter.src.Services.Interfaces;
-using AnimalShelter.src.Services.Implementation;
-using AnimalShelter.src.Repositories.Interfaces;
-using AnimalShelter.src.Repositories.Implementations;
 using AnimalShelter.src.Services.Implementation;
 
 var builder = Host.CreateApplicationBuilder(args);

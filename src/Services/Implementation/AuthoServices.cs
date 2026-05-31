@@ -1,6 +1,6 @@
 ﻿using AnimalShelter.src.Models;
-using AnimalShelter.CustomException;
-using AnimalShelter.DbForMigration;
+using AnimalShelter.src.Shared.CustomException;
+using AnimalShelter.src.Shared.DbLayer;
 using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Services.Interfaces;
 using BCrypt.Net;

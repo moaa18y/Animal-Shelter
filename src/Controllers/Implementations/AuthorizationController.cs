@@ -2,6 +2,10 @@ using System;
 using AnimalShelter.src.Shared.Dto.UserDtos;
 using AnimalShelter.src.Services.Interfaces;
 using AnimalShelter.Shared;
+using AnimalShelter.src.Shared.CustomException;
+using AnimalShelter.Shared.Menus;
+
+#nullable enable
 
 public class AuthorizationController
 {
@@ -30,21 +34,27 @@ public class AuthorizationController
 
     private UserDto? LoginFlow()
     {
-        Console.WriteLine("\n=== Login ===");
-        var email = Helpers.ReadString("Email (blank to exit): ");
-        if (string.IsNullOrWhiteSpace(email))
-            return null;
-
-        var password = Helpers.ReadPassword();
-
-        try
+        while (true)
         {
-            return _authService.Login(new AnimalShelter.src.Shared.Dto.AuthoDtos.LoginDto { Email = email, Password = password });
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Login failed: {ex.Message}");
-            return null;
+            AppMenus.PrintLoginHeader();
+            var email = Helpers.ReadString("Email (blank to exit): ");
+            if (string.IsNullOrWhiteSpace(email))
+                return null;
+
+            var password = Helpers.ReadPassword();
+
+            try
+            {
+                return _authService.Login(new AnimalShelter.src.Shared.Dto.AuthoDtos.LoginDto { Email = email, Password = password });
+            }
+            catch (UserNotFoundException)
+            {
+                Console.WriteLine("Login failed: User not found with this email address.");
+            }
+            catch (InvalidPasswordException)
+            {
+                Console.WriteLine("Login failed: Invalid password. Please try again.");
+            }
         }
     }
 

@@ -1,8 +1,8 @@
 using System;
 
-namespace AnimalShelter.CustomException
+namespace AnimalShelter.src.Shared.CustomException
 {
-    public class AnimalAlreadyAdoptedException : Exception
+    public class AnimalAlreadyAdoptedException : AppException
     {
         public AnimalAlreadyAdoptedException(int animalId, string animalName)
             : base($"Animal '{animalName}' with ID {animalId} is already adopted.")

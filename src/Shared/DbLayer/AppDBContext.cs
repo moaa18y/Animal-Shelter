@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using BCrypt.Net;
 using System.Collections.Generic;
-using AnimalShelter.src.Shared.GlobalFiles;
+using AnimalShelter.src.Shared.Enums;
 
-namespace AnimalShelter.DbForMigration
+namespace AnimalShelter.src.Shared.DbLayer
 {
     public class AppDBContext : DbContext
     {

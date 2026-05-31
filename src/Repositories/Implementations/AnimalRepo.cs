@@ -2,11 +2,12 @@ using AnimalShelter.src.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AnimalShelter.DbForMigration;
+using AnimalShelter.src.Shared.DbLayer;
 using Microsoft.EntityFrameworkCore;
 using AnimalShelter.src.Models;
+using AnimalShelter.src.Shared.Enums;
 
-using AnimalShelter.CustomException;
+using AnimalShelter.src.Shared.CustomException;
 
 namespace AnimalShelter.src.Repositories.Implementations
 {
@@ -16,7 +17,7 @@ namespace AnimalShelter.src.Repositories.Implementations
 
         public AnimalManager(AppDBContext dbContext)
         {
-            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            _dbContext = dbContext ?? throw new DbContextNotFoundException(nameof(dbContext));
         }
 
 

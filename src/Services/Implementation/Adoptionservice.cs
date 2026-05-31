@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AnimalShelter.CustomException;
+using AnimalShelter.src.Shared.CustomException;
 using AnimalShelter.src.Models;
 using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Services.Interfaces;
 using AnimalShelter.src.Shared.Dto.Adoption;
 using AnimalShelter.src.Shared.Dto.AnimalDtos;
+using AnimalShelter.src.Shared.Enums;
 
 namespace AnimalShelter.src.Services.Implementation
 {
@@ -63,7 +64,7 @@ namespace AnimalShelter.src.Services.Implementation
         {
             var adoption = _adoptionRepo.GetById(id);
             if (adoption == null)
-                throw new Exception("Adoption not found.");
+                throw new AdoptionNotFoundException();
 
             return MapAdoption(adoption);
         }
@@ -79,7 +80,7 @@ namespace AnimalShelter.src.Services.Implementation
         {
             var adoption = _adoptionRepo.GetById(id);
             if (adoption == null)
-                throw new Exception("Adoption not found.");
+                throw new AdoptionNotFoundException();
 
             var oldAnimalId = adoption.AnimalId;
 
@@ -122,7 +123,7 @@ namespace AnimalShelter.src.Services.Implementation
         {
             var adoption = _adoptionRepo.GetById(id);
             if (adoption == null)
-                throw new Exception("Adoption not found.");
+                throw new AdoptionNotFoundException();
 
             var animal = _animalRepo.FindById(adoption.AnimalId);
             if (animal != null)

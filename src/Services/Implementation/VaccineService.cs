@@ -1,4 +1,4 @@
-﻿using AnimalShelter.CustomException;
+﻿using AnimalShelter.src.Shared.CustomException;
 using AnimalShelter.src.Repositories.Implementations;
 using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Services.Interfaces;

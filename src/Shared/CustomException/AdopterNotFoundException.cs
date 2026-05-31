@@ -1,8 +1,8 @@
 using System;
 
-namespace AnimalShelter.CustomException
+namespace AnimalShelter.src.Shared.CustomException
 {
-    public class AdopterNotFoundException : Exception
+    public class AdopterNotFoundException : AppException
     {
         public AdopterNotFoundException()
             : base($"adopter not found)")

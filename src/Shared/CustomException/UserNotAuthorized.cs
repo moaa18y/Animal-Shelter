@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnimalShelter.CustomException
+namespace AnimalShelter.src.Shared.CustomException
 {
-    internal class UserNotAuthorized : Exception
+    internal class UserNotAuthorized : AppException
     {
         public UserNotAuthorized() : base("User not authorized")
         {

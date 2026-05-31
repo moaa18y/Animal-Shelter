@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AnimalShelter.CustomException
+namespace AnimalShelter.src.Shared.CustomException
 {
-    public class VaccineException:Exception
+    public class VaccineException : AppException
     {
         public VaccineException(string msg):base(msg) { }
     }

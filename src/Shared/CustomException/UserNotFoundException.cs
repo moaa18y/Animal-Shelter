@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnimalShelter.CustomException
+namespace AnimalShelter.src.Shared.CustomException
 {
-    internal class UserNotFoundException : Exception
+    internal class UserNotFoundException : AppException
     {
         public UserNotFoundException() : base("User not found") {
         

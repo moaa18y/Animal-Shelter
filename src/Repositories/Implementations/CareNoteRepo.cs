@@ -1,5 +1,5 @@
-﻿using AnimalShelter.CustomException;
-using AnimalShelter.DbForMigration;
+﻿using AnimalShelter.src.Shared.CustomException;
+using AnimalShelter.src.Shared.DbLayer;
 using AnimalShelter.src.Models;
 using AnimalShelter.src.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;

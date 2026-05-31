@@ -1,5 +1,6 @@
 ﻿
 using AnimalShelter.src.Models;
+using AnimalShelter.src.Shared.Enums;
 
 
 using System;

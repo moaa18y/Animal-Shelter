@@ -1,9 +1,10 @@
 
-using AnimalShelter.CustomException;
+using AnimalShelter.src.Shared.CustomException;
 using AnimalShelter.src.Shared.Dto.AnimalDtos;
 using AnimalShelter.src.Shared.Dto.Vaccine;
 using AnimalShelter.src.Shared.Dto.CareNoteDtos;
 using AnimalShelter.src.Models;
+using AnimalShelter.src.Shared.Enums;
 using AnimalShelter.src.Repositories.Implementations;
 using AnimalShelter.src.Repositories.Interfaces;
 using Azure;
