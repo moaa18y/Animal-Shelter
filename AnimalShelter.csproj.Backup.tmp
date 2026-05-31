@@ -28,8 +28,4 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.34.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="src\Controllers\Implementations\" />
-  </ItemGroup>
-
 </Project>
