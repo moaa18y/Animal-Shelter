@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public interface IAnimalService
     {
-        void AddAnimal(AddAnimalDto animalDto);
+        void AddAnimal(AddAnimalDto animalDto, string createdBy);
         bool RemoveAnimal(int id);
 
         GetAnimalDto GetAnimal(int id);

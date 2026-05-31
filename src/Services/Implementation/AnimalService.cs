@@ -1,14 +1,11 @@
 
 using AnimalShelter.CustomException;
-using AnimalShelter.CustomException;
-using AnimalShelter.Dto;
-using AnimalShelter.Dto.UserDtos;
+using AnimalShelter.src.Shared.Dto.AnimalDtos;
+using AnimalShelter.src.Shared.Dto.Vaccine;
+using AnimalShelter.src.Shared.Dto.CareNoteDtos;
 using AnimalShelter.src.Models;
 using AnimalShelter.src.Repositories.Implementations;
 using AnimalShelter.src.Repositories.Interfaces;
-using AnimalShelter.src.Repositories.Interfaces;
-using AnimalShelter.src.Shared.Dto;
-using AnimalShelter.src.Shared.Dto.AnimalDtos;
 using Azure;
 using System;
 using System.Collections.Generic;
@@ -29,7 +26,7 @@ namespace AnimalShelter.src.Services.Implementation
             _userRepo = userRepo ?? throw new RepoNotFoundException(nameof(userRepo));
         }
 
-        public void AddAnimal(AddAnimalDto animalDto)
+        public void AddAnimal(AddAnimalDto animalDto, string createdBy)
         {
           
             var animal = new Animal
@@ -43,7 +40,9 @@ namespace AnimalShelter.src.Services.Implementation
                 IsIndoor = animalDto.IsIndoor,
                 CanFly = animalDto.CanFly,
                 AnimalType = animalDto.AnimalType,
-                IsNocturnal = animalDto.IsNocturnal
+                IsNocturnal = animalDto.IsNocturnal,
+                CreatedBy = createdBy,
+                UpdatedAt = DateTime.Now
             };
 
             _repo.Add(animal);

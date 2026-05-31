@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using AnimalShelter.DbForMigration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Repositories.Implementations;
 using AnimalShelter.src.Services.Interfaces;
@@ -12,6 +13,8 @@ using AnimalShelter.src.Repositories.Implementations;
 using AnimalShelter.src.Services.Implementation;
 
 var builder = Host.CreateApplicationBuilder(args);
+
+builder.Logging.ClearProviders();
 
 builder.Services.AddDbContext<AppDBContext>(options =>
    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));

@@ -1,7 +1,7 @@
 ﻿using AnimalShelter.src.Models;
 using AnimalShelter.CustomException;
 using AnimalShelter.DbForMigration;
-using AnimalShelter.Dto;
+using AnimalShelter.src.Shared.Dto.UserDtos;
 using AnimalShelter.src.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;

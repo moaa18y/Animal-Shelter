@@ -1,5 +1,4 @@
 using System;
-using System;
 using AnimalShelter.src.Shared.Dto;
 using AnimalShelter.src.Shared.Dto.UserDtos;
 using AnimalShelter.src.Shared.GlobalFiles;
@@ -340,6 +339,11 @@ public class UsersController
                 adopterId = _userService.GetUserByEmail(adopterEmail).Id;
             }
         }
+        if(_authService.CanDo(currentUser))
+        {
+            var adopterEmail = Helpers.ReadString("Adopter email: ");
+                adopterId = _userService.GetUserByEmail(adopterEmail).Id;
+        }
 
         Helpers.TryExecute(() => _adoptionService.AdoptAnimal(animalId, adopterId), "Adoption successful.");
     }
@@ -505,13 +509,21 @@ public class UsersController
     }
 
     
-    private static void PrintProfile(UserDto currentUser)
+    private void PrintProfile(UserDto currentUser)
     {
+        var profile = _userService.GetUserByEmail(currentUser.Email);
+
         Console.WriteLine("\n========== My Profile ==========");
-        Console.WriteLine($"  Id       : {currentUser.Id}");
-        Console.WriteLine($"  Username : {currentUser.Username}");
-        Console.WriteLine($"  Email    : {currentUser.Email}");
-        Console.WriteLine($"  Role     : {currentUser.Role}");
+        Console.WriteLine($"  Username : {profile.Username}");
+        Console.WriteLine($"  Email    : {profile.Email}");
+        Console.WriteLine($"  Role     : {profile.Role}");
+
+        if (profile.Adoptions != null && profile.Adoptions.Count > 0)
+        {
+            Console.WriteLine($"\n  My Adoptions ({profile.Adoptions.Count}):");
+            foreach (var a in profile.Adoptions)
+                Console.WriteLine($"    - [{a.id}] {a.Animal?.Name} on {a.AdoptedAt:yyyy-MM-dd}");
+        }
         Console.WriteLine(new string('=', 34));
     }
 

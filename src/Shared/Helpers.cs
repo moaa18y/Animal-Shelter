@@ -1,5 +1,5 @@
 using System;
-using AnimalShelter.Dto.UserDtos;
+using AnimalShelter.src.Shared.Dto.UserDtos;
 using AnimalShelter.src.Shared.Dto.Adoption;
 using AnimalShelter.src.Shared.Dto.AnimalDtos;
 using AnimalShelter.src.Shared.Dto.CareNoteDtos;

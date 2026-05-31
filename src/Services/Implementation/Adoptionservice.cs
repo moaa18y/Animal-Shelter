@@ -5,9 +5,9 @@ using System.Linq;
 using AnimalShelter.CustomException;
 using AnimalShelter.src.Models;
 using AnimalShelter.src.Repositories.Interfaces;
-using AnimalShelter.src.Repositories.Interfaces;
 using AnimalShelter.src.Services.Interfaces;
 using AnimalShelter.src.Shared.Dto.Adoption;
+using AnimalShelter.src.Shared.Dto.AnimalDtos;
 
 namespace AnimalShelter.src.Services.Implementation
 {

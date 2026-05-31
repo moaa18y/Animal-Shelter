@@ -42,7 +42,7 @@ public class AnimalsController
                 case "1": ViewAllAnimals(); break;
                 case "2": ViewAnimalById(); break;
                 case "3" when currentUser.Role == EnumRole.Admin:
-                    AddAnimal();
+                    AddAnimal(currentUser);
                     break;
                 case "4" when currentUser.Role == EnumRole.Admin:
                     UpdateAnimalStatus();
@@ -95,7 +95,7 @@ public class AnimalsController
         }
     }
 
-    private void AddAnimal()
+    private void AddAnimal(UserDto currentUser)
     {
         Console.WriteLine("\n--- Add New Animal ---");
 
@@ -139,7 +139,7 @@ public class AnimalsController
 
         try
         {
-            _animalService.AddAnimal(dto);
+            _animalService.AddAnimal(dto, currentUser.Username);
             Console.WriteLine("\nAnimal added successfully.");
         }
         catch (Exception ex)
